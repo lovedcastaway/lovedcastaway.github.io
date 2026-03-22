@@ -1026,6 +1026,85 @@
     }
     .wall-tag:hover { border-color: var(--sand); color: var(--sand); }
 
+    /* ── MOBILE RESPONSIVE ── */
+    @media (max-width: 768px) {
+
+      /* Hide cursor effects on touch devices */
+      .cursor-dot, .cursor-ring { display: none; }
+      body { cursor: auto; }
+
+      /* Top bar */
+      .top-bar { padding: 0.5rem 1rem; gap: 0.4rem; }
+      .top-bar-name { font-size: 0.7rem; }
+      .top-social span { display: none; }
+      .top-social { padding: 0.35rem 0.5rem; }
+
+      /* Hero */
+      .hero { padding: 5rem 1rem 2rem; min-height: 100svh; }
+      .hero-frame, .corner { display: none; }
+      .avatar-wrap { width: 110px; height: 110px; }
+      .display-name { font-size: clamp(2.4rem, 13vw, 4rem); }
+      .arabic-header { font-size: 0.85rem; }
+      .subtitle { font-size: 0.75rem; }
+      .social-btn { font-size: 0.65rem; padding: 0.45rem 0.9rem; }
+      .scroll-hint { display: none; }
+
+      /* Arabic glow text */
+      .arabic-glow-text { font-size: clamp(1.2rem, 7vw, 2rem); }
+
+      /* Marquee */
+      .marquee-item { font-size: 0.78rem; }
+      .marquee-track { gap: 1.8rem; animation-duration: 14s; }
+
+      /* Aesthetic section */
+      .gif-section { padding: 3rem 1rem; gap: 1.5rem; }
+      .drift-gif-frame { width: 100% !important; }
+      .drift-gif-inner { min-height: 260px !important; }
+      #aestheticImg { max-height: 340px !important; }
+
+      /* Projects */
+      .interests-section { padding: 3rem 1rem 4rem; }
+      .projects-grid { grid-template-columns: 1fr; gap: 1.2rem; }
+      .project-info { flex-direction: column; align-items: flex-start; gap: 0.6rem; }
+
+      /* Video / vibes */
+      .video-section { padding: 3rem 1rem 4rem; }
+      .video-frame-wrap { width: 100%; }
+      .random-vibe-btn { font-size: 0.85rem; padding: 0.7rem 1.4rem; }
+      .vid-btn { padding: 0.5rem 0.9rem; font-size: 0.65rem; }
+
+      /* Mood selector */
+      .mood-section { padding: 2rem 1rem; }
+      .mood-grid { gap: 0.6rem; }
+      .mood-btn { padding: 0.5rem 1rem; font-size: 0.85rem; }
+
+      /* Wall & Guestbook */
+      .wall-section, .guestbook-section { padding: 2rem 1rem 3rem; }
+      .wall-input-row { flex-direction: column; }
+      .wall-sign-btn { width: 100%; text-align: center; }
+      .guestbook-form input,
+      .guestbook-form textarea { font-size: 0.72rem; }
+      .guestbook-submit { width: 100%; text-align: center; }
+
+      /* Section titles */
+      .section-title { font-size: clamp(1.6rem, 8vw, 2.5rem); }
+
+      /* Toggle button */
+      .toggle-btn { bottom: 1rem; right: 1rem; width: 38px; height: 38px; font-size: 1rem; }
+
+      /* Footer */
+      footer { padding: 2rem 1rem; }
+
+      /* Lanyard activity */
+      .spotify-bar { font-size: 0.55rem; }
+    }
+
+    @media (max-width: 400px) {
+      .display-name { font-size: clamp(2rem, 14vw, 3rem); }
+      .top-social { padding: 0.3rem 0.4rem; }
+      .mood-btn { padding: 0.4rem 0.7rem; font-size: 0.78rem; }
+    }
+
   </style>
 </head>
 <body>
