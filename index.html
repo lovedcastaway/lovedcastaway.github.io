@@ -1598,11 +1598,11 @@
           'apikey': SUPABASE_KEY,
           'Authorization': `Bearer ${SUPABASE_KEY}`,
           'Content-Type': 'application/json',
-          'Prefer': method === 'POST' ? 'return=representation' : '',
+          'Prefer': method === 'POST' ? 'return=representation' : 'return=minimal',
         },
         body: body ? JSON.stringify(body) : null
       });
-      if (method === 'DELETE') return;
+      if (method === 'DELETE' || method === 'PATCH') return res;
       return res.json();
     }
 
