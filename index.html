@@ -1370,6 +1370,9 @@
   <footer>
     <div class="footer-name">loved.castaway</div>
     <div class="footer-id">ID: 790524458971562044</div>
+    <div style="margin-top:1.2rem;">
+      <button onclick="adminLogin()" id="adminBtn" style="background:transparent;border:1px solid rgba(200,169,110,0.15);color:rgba(200,169,110,0.25);font-family:'Share Tech Mono',monospace;font-size:0.55rem;letter-spacing:0.2em;padding:0.3rem 0.8rem;cursor:pointer;transition:all 0.3s;" onmouseover="this.style.color='rgba(200,169,110,0.6)'" onmouseout="this.style.color='rgba(200,169,110,0.25)'">⚙ admin</button>
+    </div>
   </footer>
 
   <!-- ── DARK/LIGHT TOGGLE BUTTON ── -->
@@ -1584,62 +1587,114 @@
       document.getElementById('ytPlayer').scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
 
+    // ── SUPABASE SETUP ──
+    const SUPABASE_URL = 'https://fxpzwxnnaakrsntglxbi.supabase.co';
+    const SUPABASE_KEY = 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZ4cHp3eG5uYWFrcnNudGdseGJpIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NzQxOTk3ODYsImV4cCI6MjA4OTc3NTc4Nn0.jNltOyV3_DkTajiUi7srDBAEzaxXNPm2zOFi_gqZ8tI';
+
+    async function sbFetch(table, method = 'GET', body = null, extraPath = '') {
+      const res = await fetch(`${SUPABASE_URL}/rest/v1/${table}${extraPath}`, {
+        method,
+        headers: {
+          'apikey': SUPABASE_KEY,
+          'Authorization': `Bearer ${SUPABASE_KEY}`,
+          'Content-Type': 'application/json',
+          'Prefer': method === 'POST' ? 'return=representation' : '',
+        },
+        body: body ? JSON.stringify(body) : null
+      });
+      if (method === 'DELETE') return;
+      return res.json();
+    }
+
+    // ── ADMIN ──
+    let isAdmin = false;
+    function adminLogin() {
+      const pass = prompt('Enter admin password:');
+      if (pass === 'ryoof') {
+        isAdmin = true;
+        alert('✅ Admin mode activated!');
+        loadWall();
+        loadGuestbook();
+      } else if (pass !== null) {
+        alert('❌ Wrong password');
+      }
+    }
+
     // ── SIGN THE WALL ──
-    const wallNames = JSON.parse(localStorage.getItem('wallNames') || '[]');
-    function renderWall() {
+    async function loadWall() {
+      const data = await sbFetch('wall?order=created_at.desc&limit=100');
       const container = document.getElementById('wallNames');
       container.innerHTML = '';
-      wallNames.forEach(name => {
+      if (!data || !data.length) return;
+      data.forEach(row => {
         const tag = document.createElement('div');
         tag.className = 'wall-tag';
-        tag.textContent = name;
+        tag.style.display = 'inline-flex';
+        tag.style.alignItems = 'center';
+        tag.style.gap = '0.4rem';
+        tag.textContent = row.name;
+        if (isAdmin) {
+          const del = document.createElement('span');
+          del.textContent = '✕';
+          del.style.cssText = 'cursor:pointer;color:#f23f43;font-size:0.6rem;margin-left:4px;';
+          del.onclick = async () => {
+            await sbFetch('wall', 'DELETE', null, `?id=eq.${row.id}`);
+            loadWall();
+          };
+          tag.appendChild(del);
+        }
         container.appendChild(tag);
       });
     }
-    function signWall() {
+
+    async function signWall() {
       const input = document.getElementById('wallInput');
       const name = input.value.trim();
       if (!name) return;
-      wallNames.unshift(name);
-      if (wallNames.length > 100) wallNames.pop();
-      localStorage.setItem('wallNames', JSON.stringify(wallNames));
-      renderWall();
+      await sbFetch('wall', 'POST', { name });
       input.value = '';
+      loadWall();
     }
+
     document.getElementById('wallInput').addEventListener('keydown', e => {
       if (e.key === 'Enter') signWall();
     });
-    renderWall();
+    loadWall();
 
     // ── GUESTBOOK ──
-    const gbMessages = JSON.parse(localStorage.getItem('gbMessages') || '[]');
-    function renderGuestbook() {
+    async function loadGuestbook() {
+      const data = await sbFetch('guestbook?order=created_at.desc&limit=50');
       const container = document.getElementById('gbMessages');
       container.innerHTML = '';
-      gbMessages.forEach(msg => {
+      if (!data || !data.length) return;
+      data.forEach(row => {
         const el = document.createElement('div');
         el.className = 'guestbook-msg';
+        const date = new Date(row.created_at).toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' });
         el.innerHTML = `
-          <div class="msg-name">${msg.name}</div>
-          <div class="msg-text">${msg.text}</div>
-          <div class="msg-time">${msg.time}</div>
+          <div class="msg-name">${row.name}${isAdmin ? `<span onclick="deleteMsg(${row.id})" style="cursor:pointer;color:#f23f43;font-size:0.6rem;margin-left:8px;float:right;">✕ delete</span>` : ''}</div>
+          <div class="msg-text">${row.message}</div>
+          <div class="msg-time">${date}</div>
         `;
         container.appendChild(el);
       });
     }
-    function submitGuestbook() {
+
+    async function deleteMsg(id) {
+      await sbFetch('guestbook', 'DELETE', null, `?id=eq.${id}`);
+      loadGuestbook();
+    }
+
+    async function submitGuestbook() {
       const name = document.getElementById('gbName').value.trim();
-      const text = document.getElementById('gbMsg').value.trim();
-      if (!name || !text) return;
-      const now = new Date().toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' });
-      gbMessages.unshift({ name, text, time: now });
-      if (gbMessages.length > 50) gbMessages.pop();
-      localStorage.setItem('gbMessages', JSON.stringify(gbMessages));
-      renderGuestbook();
+      const message = document.getElementById('gbMsg').value.trim();
+      if (!name || !message) return;
+      await sbFetch('guestbook', 'POST', { name, message });
       document.getElementById('gbName').value = '';
       document.getElementById('gbMsg').value = '';
+      loadGuestbook();
     }
-    renderGuestbook();
+    loadGuestbook();
 
     // ── CUSTOM CURSOR ──
     const cursorDot  = document.getElementById('cursorDot');
