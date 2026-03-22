@@ -562,6 +562,63 @@
     @media (max-width: 500px) {
       .socials { flex-direction: column; gap: 0.8rem; }
     }
+    /* ── PROJECTS ── */
+    .projects-grid {
+      margin-top: 2.5rem;
+      display: grid;
+      grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+      gap: 1.5rem;
+    }
+    .project-card {
+      border: 1px solid rgba(200,169,110,0.15);
+      background: var(--smoke);
+      overflow: hidden;
+      transition: border-color 0.3s;
+    }
+    .project-card:hover { border-color: rgba(200,169,110,0.4); }
+    .project-video-wrap {
+      position: relative;
+      aspect-ratio: 16/9;
+      background: #000;
+    }
+    .project-video-wrap iframe {
+      width: 100%;
+      height: 100%;
+      display: block;
+    }
+    .project-info {
+      padding: 1rem 1.2rem;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 1rem;
+    }
+    .project-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.2rem;
+      letter-spacing: 0.12em;
+      color: var(--sand);
+    }
+    .project-link {
+      display: flex;
+      align-items: center;
+      gap: 0.4rem;
+      font-size: 0.6rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: rgba(200,169,110,0.5);
+      text-decoration: none;
+      border: 1px solid rgba(200,169,110,0.2);
+      padding: 0.3rem 0.7rem;
+      transition: all 0.25s;
+      white-space: nowrap;
+    }
+    .project-link:hover {
+      color: var(--ink);
+      background: var(--sand);
+      border-color: var(--sand);
+    }
+
     /* ── VIDEO SECTION ── */
     .video-section {
       padding: 4rem 2rem 5rem;
@@ -749,41 +806,45 @@
     </div>
   </section>
 
-  <!-- ── INTERESTS ── -->
+  <!-- ── PROJECTS ── -->
   <section class="interests-section">
-    <p class="section-label" style="margin-bottom:0.6rem;">// interests // الاهتمامات</p>
-    <h2 class="section-title">What I'm <span class="accent">Into</span></h2>
+    <p class="section-label" style="margin-bottom:0.6rem;">// projects // المشاريع</p>
+    <h2 class="section-title">My <span class="accent">Projects</span></h2>
 
-    <div class="interests-grid">
-      <div class="interest-card">
-        <span class="interest-icon">🚗</span>
-        <div class="interest-name">Arab Driftcore</div>
-        <div class="interest-desc">The aesthetic, the culture, the smoke & speed.</div>
+    <div class="projects-grid">
+      <div class="project-card">
+        <div class="project-video-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/AtLTr1nFAJk?rel=0&modestbranding=1"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+        <div class="project-info">
+          <div class="project-name">Unfinished Work</div>
+          <a class="project-link" href="https://youtu.be/AtLTr1nFAJk" target="_blank" rel="noopener">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></svg>
+            watch on youtube
+          </a>
+        </div>
       </div>
-      <div class="interest-card">
-        <span class="interest-icon">🎮</span>
-        <div class="interest-name">Gaming</div>
-        <div class="interest-desc">Digital worlds, late nights, no mercy.</div>
-      </div>
-      <div class="interest-card">
-        <span class="interest-icon">🎵</span>
-        <div class="interest-name">Music</div>
-        <div class="interest-desc">Phonk, Arabic R&B, and everything in between.</div>
-      </div>
-      <div class="interest-card">
-        <span class="interest-icon">🌙</span>
-        <div class="interest-name">Night Culture</div>
-        <div class="interest-desc">Cities after midnight feel like a different planet.</div>
-      </div>
-      <div class="interest-card">
-        <span class="interest-icon">📡</span>
-        <div class="interest-name">Discord</div>
-        <div class="interest-desc">Community builder. Always online somewhere.</div>
-      </div>
-      <div class="interest-card">
-        <span class="interest-icon">🏜️</span>
-        <div class="interest-name">Desert Aesthetics</div>
-        <div class="interest-desc">Sand, heat, and the horizon stretched to nothing.</div>
+      <div class="project-card">
+        <div class="project-video-wrap">
+          <iframe
+            src="https://www.youtube.com/embed/5gBRZefLYNM?rel=0&modestbranding=1"
+            frameborder="0"
+            allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+            allowfullscreen
+          ></iframe>
+        </div>
+        <div class="project-info">
+          <div class="project-name">Assetto Highlights</div>
+          <a class="project-link" href="https://youtu.be/5gBRZefLYNM" target="_blank" rel="noopener">
+            <svg width="11" height="11" viewBox="0 0 24 24" fill="currentColor"><path d="M21 13v10h-21v-19h12v2h-10v15h17v-8h2zm3-12h-10.988l4.035 4-6.977 7.07 2.828 2.828 6.977-7.07 4.125 4.172v-11z"/></svg>
+            watch on youtube
+          </a>
+        </div>
       </div>
     </div>
   </section>
@@ -867,7 +928,7 @@
       'OMgaE1s-qCU', 'OOvlXhloUQ4', 'P1isZ7UB1ts', 'PP6dqCZetEk', 'Po1Z4nKmaiI',
       'PvtEZVluorU', 'Q266UWljhlc', 'QOzqpFZS18U', 'QTKQgFMl1q0', 'QUS4RfM7QBc',
       'QaHSipuf-p8', 'Qc-ykRpx7fg', 'QxrBqH0I1tg', 'R8aqBZ_DhMk', 'R8wL8U2CYfU',
-      'XpwZyB86Uas', 'RGdltwV_i30', 'Si2BIiNnObU', 'SoWVTqItWrg', 'Su_LNFnRXS0',
+      'RGHov1dZaug', 'RGdltwV_i30', 'Si2BIiNnObU', 'SoWVTqItWrg', 'Su_LNFnRXS0',
       'Su_tLGZ7wFI', 'TBi0Gcq2Z_Q', 'TMKo-PBzVY8', 'TMzgaA-ZFF0', 'T_IpUXQabPU',
       'Tip8AXw0mhE', 'UBVHnK6eqIc', 'UhFj3WRs0qs', 'Ukb-t8dPExQ', 'UkwgccfAW8w',
       'VAbIHTo_qGY', 'VE2wDuvETV8', 'VJF6RiYdFAM', 'VeK510-Obqo', 'VgK_JIqCQSk',
@@ -899,7 +960,7 @@
       'vUaZM3e5aeg', 'vdSIhKD0Imk', 'vdr6qTScFms', 'vhQyCCJIMVI', 'vsQdDgLJTWg',
       'wBwDsfWpDBU', 'wOYjBozS2-c', 'wSiNav4cyDo', 'x11b0PM_Qfk', 'x33qBwGVY1k',
       'xCvcYdDlMAo', 'xLWb9n2r5OM', 'xpF9XDpNh2Q', 'y_JdbxJbd-s', 'yskW7_xcykQ',
-      'z9k03MVobQc', 'zgwuRtIhCM8', 'zrmDCCEkCU8'
+      'z9k03MVobQc', 'zgwuRtIhCM8', 'zrmDCCEkCU8', 'AtLTr1nFAJk'
     ];
 
     // Shuffle array randomly
