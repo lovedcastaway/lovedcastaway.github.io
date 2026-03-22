@@ -657,28 +657,11 @@
   <section class="gif-section">
     <p class="section-label">// aesthetic // الجماليات</p>
 
-    <div class="drift-gif-frame">
-      <div class="drift-gif-inner">
-        <!-- Arabian Driftcore-style car GIF -->
-        <img
-          src="https://i.pinimg.com/736x/f0/5e/a6/f05ea690d8b8c04596e7f63b78aa7046.jpg"
-          alt="crown"
-          loading="lazy"
-        />
+    <div class="drift-gif-frame" id="aestheticFrame">
+      <div class="drift-gif-inner" style="position:relative; min-height: 400px;">
+        <img id="aestheticImg" src="https://i.pinimg.com/736x/f0/5e/a6/f05ea690d8b8c04596e7f63b78aa7046.jpg" alt="aesthetic" style="width:100%; display:block; filter:saturate(0.5) sepia(0.5) contrast(1.1); transition: opacity 1s ease; object-fit:cover; max-height:520px;" />
         <div class="eye-overlay"></div>
-
-      </div>
-    </div>
-
-    <div class="drift-gif-frame" style="width: min(420px, 92vw); margin-top: -1rem;">
-      <div class="drift-gif-inner">
-        <img
-          src="https://i.pinimg.com/736x/ee/24/49/ee2449ce8a394b0654a65c5ac95c7466.jpg"
-          alt="mcr stencil"
-          loading="lazy"
-        />
-        <div class="eye-overlay"></div>
-
+        <div style="position:absolute; bottom:14px; right:14px; z-index:3; display:flex; gap:6px;" id="aestheticDots"></div>
       </div>
     </div>
   </section>
@@ -776,10 +759,64 @@
 
     // ── YOUTUBE VIDEO SHUFFLER ──
     const videos = [
-      'f5PuD_UEGnw',
-      'fbLcBv1r_i8',
-      'IBJ1BicitP4',
-      'E7hTpltLjIY'
+      '-5XPSu9_S9o', '-A_8-8VWq7E', '-HAH3boYuHQ', '-L66pwvbC64', '-_9fJm6diDA',
+      '-auVLfnNwsU', '-wapA5WbAY8', '091GDFXK8p0', '0UgGyW0e1ic', '0qmmKWV1VqA',
+      '0wuRpuOe5gs', '1mFNQEczC-E', '1mZ0qgi0PaY', '1olpDzCnxfQ', '29GooliBnPg',
+      '2D25bHunXJs', '2_Ht7_xys-c', '2iDDYBuEXcg', '31eGIpI_kZA', '3336jS2wVys',
+      '3SZANM12NVs', '3VC6Xz7Mqmg', '3iroonUgdTc', '3tTkpbf6e98', '3wLpUG_RC1A',
+      '49a9EwPnXVI', '4B77UVzXx4k', '4Kmtp6EMp4I', '4ON57UXXgtA', '4PmeZWum4cA',
+      '4SlRMwMI_MY', '4cag8gv8SA4', '4sLGQenWHcc', '4s_6Pcy2Gb0', '4wBG4SemUQA',
+      '6fPk8KXJ4pA', '6lQ4SUO6-jk', '6zIWnUN7NO0', '70kuGu5j0Qc', '7uhWJATdXMA',
+      '87cXGSuSoUw', '8AmEKP3q9ZA', '8F8ImsXGdU8', '99MrZp1MSjs', '9J0Sy1JGwq8',
+      'AAeq8qXdJpM', 'ADT0YMO6YYM', 'A_9ChYhqrYk', 'B7e14szOMj8', 'B_y9NcJxepM',
+      'BiuWGlqq7tw', 'BjS5F93A9WI', 'BnFr4MP7Tjo', 'C52LeGFMLM0', 'CJqg-nsbdwM',
+      'CPEjdJrSlhI', 'CRz2f81DjKE', 'CV203D51Tpo', 'DU7amRxDs04', 'DcZ9DLjzaGQ',
+      'E7hTpltLjIY', 'EOrmMrjUcbI', 'EfVi3x5f6OQ', 'Ev9QKVlMxMI', 'F1Qt50_9v94',
+      'FBcJ7I5flM4', 'FDbI-CKzSxw', 'FTq_tKDox8s', 'G2H7gNVY5Ms', 'G4T5Qvp47xA',
+      'G7ixRSTb_G4', 'GLJSNZaiw0E', 'GlBtUjCVZK0', 'GoF424bCmrE', 'HV5fF5d_wl8',
+      'HVOAdka8A4E', 'HcGe7LoC_BU', 'Hx3k0uJtnqk', 'I31KisvyHrw', 'I42beur0T1o',
+      'I4O7fze-Whs', 'IBJ1BicitP4', 'ISm5uv7b8XA', 'IW7sy8UH7qg', 'ImWVIS9z5vQ',
+      'IooRaKWNwlE', 'J9xt2ujlNC4', 'JItKC8Uf8mo', 'JLqd53myzYA', 'JMzibZ40Uh0',
+      'JYJmXB_J0F0', 'JZ4T_lJujXc', 'JlstuH-LARU', 'LarcVKOxAys', 'LcITrYGTiCs',
+      'Lqy9H4OjjuI', 'M-LekoS_9wc', 'MFYm1sSt99g', 'MFpJN23F8Lc', 'MhNPGDRWB5E',
+      'MpBUjADlVKg', 'N9-hlW3HC30', 'NGPASD40Eoo', 'NRtSSzK0s1U', 'NWHKGJuriTQ',
+      'Nbojc_GOuFY', 'NrJiPjBquMk', 'O0gGdfIWfXs', 'O4aO0_qk9G4', 'O6P-r8xa0KM',
+      'OMgaE1s-qCU', 'OOvlXhloUQ4', 'P1isZ7UB1ts', 'PP6dqCZetEk', 'Po1Z4nKmaiI',
+      'PvtEZVluorU', 'Q266UWljhlc', 'QOzqpFZS18U', 'QTKQgFMl1q0', 'QUS4RfM7QBc',
+      'QaHSipuf-p8', 'Qc-ykRpx7fg', 'QxrBqH0I1tg', 'R8aqBZ_DhMk', 'R8wL8U2CYfU',
+      'RGHov1dZaug', 'RGdltwV_i30', 'Si2BIiNnObU', 'SoWVTqItWrg', 'Su_LNFnRXS0',
+      'Su_tLGZ7wFI', 'TBi0Gcq2Z_Q', 'TMKo-PBzVY8', 'TMzgaA-ZFF0', 'T_IpUXQabPU',
+      'Tip8AXw0mhE', 'UBVHnK6eqIc', 'UhFj3WRs0qs', 'Ukb-t8dPExQ', 'UkwgccfAW8w',
+      'VAbIHTo_qGY', 'VE2wDuvETV8', 'VJF6RiYdFAM', 'VeK510-Obqo', 'VgK_JIqCQSk',
+      'VkVedgEDbMA', 'Vp7llP0W_xI', 'VtkyB7z6nbs', 'VyUUu9ci6IU', 'WI3kgP5eh5c',
+      'WNYquyh7bws', 'WvY9ngxAVdo', 'XIU8F0bHL2o', 'XUBga8jQGH0', 'XiX2aCa1fYs',
+      'XszBEgg1zhg', 'Y2L_rCqyA8Y', 'YAlGBqp6du4', 'YBt16m5gczA', 'YZaOJn26-Jk',
+      'YiIfSUydtjU', 'YmqkQyWLReM', 'YrQTSFpzLjA', 'YyI4KUAzPYQ', 'ZOneGEezgsw',
+      'ZmyHGS1-w-I', 'Zo6tOXq5s3E', '_MPGXcoM-PI', '_TIdPlQLDgk', '_V5RPIqTr5U',
+      '_qyoIExUfbk', '_sC-LC2gN7k', 'a9HMMKrB0s4', 'aKGRcDOqhpo', 'aMUGCeD-dQM',
+      'aTGtjOe9soo', 'aWMdCDG0sgA', 'akH7K-A9FEM', 'aob_knfVTK8', 'auDU2adxIGE',
+      'bSOlhncy5Q4', 'bSaNEo9CzBY', 'bvM822It7xM', 'c0ivtWcb4nQ', 'cC_zwhiXn_w',
+      'cFSBtFZwOUs', 'cFYDsYSlBSQ', 'cV3wEDtj25E', 'ch-C5YAw9wk', 'csBpIQszjik',
+      'd-6mLwFagqM', 'daAV0MVohg4', 'eJtaaMBF8Mo', 'el7ytNKWfGk', 'en4zo2ZWY_s',
+      'enbjGsxO7Q8', 'eyvGKtOJ4ts', 'f-GgGAAkl3w', 'f3sEgGe10OU', 'f4Q0_9zB78I',
+      'f5PuD_UEGnw', 'fPuoESRGW7c', 'fQCyTB37OKo', 'fbLcBv1r_i8', 'gQxPVPUoiuo',
+      'ge7kJHJBFvI', 'h1XV2h0IX98', 'h9MtHnNkTHc', 'hHexPKkf-3Y', 'hMWcWQ7_g9E',
+      'hVREoWuphCw', 'hn_61Bc9yXU', 'i92qwSU8f_g', 'iSA9MNmt7wI', 'ik9pnqXq4QA',
+      'iuDoGvPN7K8', 'jDrB2HpgkPw', 'jSJvMnMwaNo', 'jZrWR1suWIc', 'jrEEzUFChyE',
+      'jzTU0K4q0K4', 'k-dB3udcxio', 'kAAHAia1X_0', 'kTLZ_hl_8DM', 'kX_ej6lhVYc',
+      'kdBFW-KNI74', 'krjzX8u47Ug', 'l5VqM_FGOFQ', 'l6qYPYN3eGA', 'lKaPPri-iOk',
+      'llmbcMmZuQ4', 'lvPyPF-YyS8', 'mCZ7FKepkX0', 'mXbe0CBnqCA', 'mypM677J9QI',
+      'n-HwQZIiDzU', 'n7B6rNnJnUo', 'nKgIDaDux0k', 'nzJN4l86Sdc', 'o-HymixLOtI',
+      'oHE1OIH6f9k', 'oiZY3Z6GOAo', 'pEV_jW6S8eM', 'pJnpccIg6bI', 'pL7Hpupisg0',
+      'pLaSGkF6PQQ', 'pdhPPnueG_k', 'q-KApskLbzY', 'q5xWDYApuI4', 'qUE8IA-4F5E',
+      'qX9Cx0ijOOc', 'qn9IYLN2E2A', 'quXI8N-plMA', 'rTyulRArO98', 'rYirDm3n4lk',
+      's0RHWuo2vH8', 's8WvKGeF2v8', 'sA1Ac_nc49g', 'sC3pDGRJ3Ro', 'sRuZummJ9bI',
+      'seV37ETJSvI', 't1FPFpqhSSA', 't2CXRx4NTn4', 't6a5m0UZgzU', 't87TXeFhvXE',
+      'u1hc73WtQTw', 'uUao0hgxiQI', 'uvDDPm6e0Cc', 'v5F4q6t_hPA', 'vBmmz8gxOfU',
+      'vUaZM3e5aeg', 'vdSIhKD0Imk', 'vdr6qTScFms', 'vhQyCCJIMVI', 'vsQdDgLJTWg',
+      'wBwDsfWpDBU', 'wOYjBozS2-c', 'wSiNav4cyDo', 'x11b0PM_Qfk', 'x33qBwGVY1k',
+      'xCvcYdDlMAo', 'xLWb9n2r5OM', 'xpF9XDpNh2Q', 'y_JdbxJbd-s', 'yskW7_xcykQ',
+      'z9k03MVobQc', 'zgwuRtIhCM8', 'zrmDCCEkCU8'
     ];
 
     // Shuffle array randomly
@@ -812,6 +849,67 @@
     }
 
     updatePlayer();
-  </script>
+
+    // ── AESTHETIC IMAGE SLIDESHOW ──
+    const aestheticImgs = [
+      'https://i.pinimg.com/736x/f0/5e/a6/f05ea690d8b8c04596e7f63b78aa7046.jpg',
+      'https://i.pinimg.com/736x/ee/24/49/ee2449ce8a394b0654a65c5ac95c7466.jpg',
+      'https://cdn.discordapp.com/attachments/1227568798450847816/1485182384629485568/download_29.jpg?ex=69c0ef61&is=69bf9de1&hm=6445916bbb50c1ac6066033b91f7ae0bc1b28831d9592190d5c68c2cfba03c86&',
+      'https://cdn.discordapp.com/attachments/1227568798450847816/1485182384855842887/Visit_TikTok_to_discover_profiles.jpg?ex=69c0ef61&is=69bf9de1&hm=b5295644469456fc1521a76de80884e5a1d7dc6335d028270cd29fc13f51fb2e&',
+      'https://cdn.discordapp.com/attachments/1227568798450847816/1485182385183002635/5d58b3ac5ae1099e.jpg?ex=69c0ef61&is=69bf9de1&hm=1f4b53a0cd0a15001fdab7f049515feeb77f11d2c47ab9e9825badc09193d782&',
+      'https://cdn.discordapp.com/attachments/1227568798450847816/1485182385459957791/Jordan__3.jpg?ex=69c0ef62&is=69bf9de2&hm=3cd021d27e36c8f0daef0433e6a4bdb3f2639a340b2e4530b26254d99ff010f1&',
+      'https://cdn.discordapp.com/attachments/1227568798450847816/1485182385782784040/download_28.jpg?ex=69c0ef62&is=69bf9de2&hm=14ac69082b1297c9fb685a91ede6a1bd4bb35fefb36467484334fd8d6709bacc&',
+      'https://cdn.discordapp.com/attachments/1227568798450847816/1485182386013474877/Arabian_Drift_Core.jpg?ex=69c0ef62&is=69bf9de2&hm=15d1a54fb0d14a21cc02b13a20e75ee6eaa290e8a049fdd4ae94060067ce537d&',
+      'https://cdn.discordapp.com/attachments/1227568798450847816/1485182386261069974/4b5d688e7924d4d6.jpg?ex=69c0ef62&is=69bf9de2&hm=f74a06e24253ccef87d3da6bac580ba378f56a5fabf7ea2fdbf9cf33570d0374&',
+      'https://cdn.discordapp.com/attachments/1227568798450847816/1485182386680365156/download_32.jpg?ex=69c0ef62&is=69bf9de2&hm=ba3d2c5d63a088ce6f6f5d6d3564e9929cf2c1612f8aa8ea400df62a35c5179c&',
+      'https://cdn.discordapp.com/attachments/1227568798450847816/1485182428149710868/25.jpg?ex=69c0ef6c&is=69bf9dec&hm=11ac21ea4968a50b54dbe4243ffc3011ca33038d60e1716e9261522ebe2354d6&',
+      'https://cdn.discordapp.com/attachments/1227568798450847816/1485182428489191545/O_M_A_R___on_TikTok.jpg?ex=69c0ef6c&is=69bf9dec&hm=597e94e373cb4590bd4ee02a642e99aa855f7eea88dcd16b248e30de8b3fb7e2&',
+      'https://cdn.discordapp.com/attachments/1227568798450847816/1485182428963143791/My_tattoo_customer_in_turkey.jpg?ex=69c0ef6c&is=69bf9dec&hm=d0017d4da3d185470e16581a35ecd0b8b3d7fb142a0b13e3ea5600e01a22699f&',
+      'https://cdn.discordapp.com/attachments/1227568798450847816/1485182429479309453/download_34.jpg?ex=69c0ef6c&is=69bf9dec&hm=3a4c952ef3deb136dc7fc352075604491bc62c977b8239c0da5b009b91b8ce37&',
+      'https://cdn.discordapp.com/attachments/1227568798450847816/1485182429755998269/masterboy.jpg?ex=69c0ef6c&is=69bf9dec&hm=d4580771c64e8cff07f1694a5f30a214ca5015d16cb53e368bb14b112280fcc7&',
+      'https://cdn.discordapp.com/attachments/1227568798450847816/1485182430460510308/Crown.jpg?ex=69c0ef6c&is=69bf9dec&hm=5606608f5b630b24b5eaa2801c26952c3e39abce20a1a2160d70c70468da1433&',
+      'https://cdn.discordapp.com/attachments/1227568798450847816/1485182430779412510/download_33.jpg?ex=69c0ef6c&is=69bf9dec&hm=060f061feb0fdad7e2bcfdf1e6e9eec24361b1526ba26f1e4ffc53f8e08600f5&',
+      'https://cdn.discordapp.com/attachments/1227568798450847816/1485182431123472494/bb627123ad8933d0.jpg?ex=69c0ef6c&is=69bf9dec&hm=8dfce70f48347c770be7af7a377da6f9f130d380fe7b3310969f3a7d355c744c&',
+      'https://cdn.discordapp.com/attachments/1227568798450847816/1485182431421009940/D7_TikTok.jpg?ex=69c0ef6d&is=69bf9ded&hm=ea0650ed307bfd21ae21773f3cb96b90735823199f2c594c1399dd7a57e9e74d&',
+      'https://cdn.discordapp.com/attachments/1227568798450847816/1485182431773458494/6b45279cb5acf111.jpg?ex=69c0ef6d&is=69bf9ded&hm=faabbc48528d47ba6c1b2d339c7e60a0a89e50a92a8a8551c9d3b1c6729021c3&',
+      'https://cdn.discordapp.com/attachments/1227568798450847816/1485182458805747872/download_39.jpg?ex=69c0ef73&is=69bf9df3&hm=5ce8f0c809aedf2a7253c59d853e33bb08c95c60cc6f33429233d031bb7c3277&',
+      'https://cdn.discordapp.com/attachments/1227568798450847816/1485182459133038602/download_38.jpg?ex=69c0ef73&is=69bf9df3&hm=ce2de85422190be7e0110c8a461190072fc67fc8faba692f0c3a7ad8ca383f79&',
+      'https://cdn.discordapp.com/attachments/1227568798450847816/1485182459414052915/download_37.jpg?ex=69c0ef73&is=69bf9df3&hm=1b722103b24974a8e72135a2066fc851cf7f766d245a373a2885151243a098d0&',
+      'https://cdn.discordapp.com/attachments/1227568798450847816/1485182460626206781/fiona_gallagher.jpg?ex=69c0ef73&is=69bf9df3&hm=278dee76e32b817676d156964c9b155d6d30bbfd410bbd67708f62e98d27ab72&'
+    ];
+
+    let aestheticIndex = 0;
+    const aestheticEl = document.getElementById('aestheticImg');
+    const dotsContainer = document.getElementById('aestheticDots');
+
+    // Build dots
+    aestheticImgs.forEach((_, i) => {
+      const dot = document.createElement('div');
+      dot.style.cssText = `width:6px;height:6px;border-radius:50%;background:${i===0?'#c8a96e':'rgba(200,169,110,0.3)'};cursor:pointer;transition:background 0.3s;flex-shrink:0;`;
+      dot.addEventListener('click', () => goToAesthetic(i));
+      dotsContainer.appendChild(dot);
+    });
+
+    function updateDots() {
+      Array.from(dotsContainer.children).forEach((dot, i) => {
+        dot.style.background = i === aestheticIndex ? '#c8a96e' : 'rgba(200,169,110,0.3)';
+      });
+    }
+
+    function goToAesthetic(index) {
+      aestheticEl.style.opacity = '0';
+      setTimeout(() => {
+        aestheticIndex = index;
+        aestheticEl.src = aestheticImgs[aestheticIndex];
+        aestheticEl.style.opacity = '1';
+        updateDots();
+      }, 1000);
+    }
+
+    function nextAesthetic() {
+      goToAesthetic((aestheticIndex + 1) % aestheticImgs.length);
+    }
+
+    setInterval(nextAesthetic, 5000);
 </body>
 </html>
