@@ -1622,18 +1622,16 @@
 
     // ── NTFY NOTIFICATIONS ──
     const NTFY_TOPIC = 'lovedcastaway-site-2026-letmepass2006';
-    async function sendNotif(title, message) {
-      try {
-        await fetch(`https://ntfy.sh/${NTFY_TOPIC}`, {
-          method: 'POST',
-          headers: {
-            'Title': title,
-            'Priority': 'default',
-            'Content-Type': 'text/plain',
-          },
-          body: message
-        });
-      } catch(e) {}
+    function sendNotif(title, message) {
+      fetch(`https://ntfy.sh/${NTFY_TOPIC}`, {
+        method: 'POST',
+        headers: {
+          'Title': title,
+          'Priority': 'high',
+          'Content-Type': 'text/plain',
+        },
+        body: message
+      }).then(r => console.log('ntfy:', r.status)).catch(e => console.log('ntfy error:', e));
     }
     async function loadWall() {
       const data = await sbFetch('wall?order=created_at.desc&limit=100');
@@ -1666,7 +1664,7 @@
       const name = input.value.trim();
       if (!name) return;
       await sbFetch('wall', 'POST', { name });
-      await sendNotif('✦ New Wall Sign', `${name} signed your wall!`);
+      sendNotif('✦ New Wall Sign', `${name} signed your wall!`);
       input.value = '';
       loadWall();
     }
@@ -1705,7 +1703,7 @@
       const message = document.getElementById('gbMsg').value.trim();
       if (!name || !message) return;
       await sbFetch('guestbook', 'POST', { name, message });
-      await sendNotif('💬 New Guestbook Message', `${name}: ${message}`);
+      sendNotif('💬 New Guestbook Message', `${name}: ${message}`);
       document.getElementById('gbName').value = '';
       document.getElementById('gbMsg').value = '';
       loadGuestbook();
