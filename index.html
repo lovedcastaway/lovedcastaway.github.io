@@ -1664,7 +1664,8 @@
       const name = input.value.trim();
       if (!name) return;
       await sbFetch('wall', 'POST', { name });
-      sendNotif('✦ New Wall Sign', `${name} signed your wall!`);
+      console.log('calling sendNotif for wall...');
+      sendNotif('New Wall Sign', `${name} signed your wall!`);
       input.value = '';
       loadWall();
     }
@@ -1703,7 +1704,7 @@
       const message = document.getElementById('gbMsg').value.trim();
       if (!name || !message) return;
       await sbFetch('guestbook', 'POST', { name, message });
-      sendNotif('💬 New Guestbook Message', `${name}: ${message}`);
+      sendNotif('New Guestbook Message', `${name}: ${message}`);
       document.getElementById('gbName').value = '';
       document.getElementById('gbMsg').value = '';
       loadGuestbook();
