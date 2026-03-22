@@ -25,7 +25,46 @@
       color: var(--white-dust);
       font-family: 'Share Tech Mono', monospace;
       overflow-x: hidden;
-      cursor: crosshair;
+      cursor: none;
+    }
+
+    /* ── CUSTOM CURSOR ── */
+    .cursor-dot {
+      position: fixed;
+      width: 10px;
+      height: 10px;
+      border-radius: 50%;
+      background: #c8a96e;
+      pointer-events: none;
+      z-index: 99999;
+      transform: translate(-50%, -50%);
+      transition: transform 0.1s ease, background 0.2s;
+      box-shadow: 0 0 8px #c8a96e, 0 0 16px #c8a96e88;
+      mix-blend-mode: screen;
+    }
+    .cursor-ring {
+      position: fixed;
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      border: 1px solid rgba(200,169,110,0.5);
+      pointer-events: none;
+      z-index: 99998;
+      transform: translate(-50%, -50%);
+      transition: all 0.12s ease;
+      mix-blend-mode: screen;
+    }
+    .spark {
+      position: fixed;
+      pointer-events: none;
+      z-index: 99997;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      animation: sparkFade 0.6s ease-out forwards;
+    }
+    @keyframes sparkFade {
+      0%   { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+      100% { opacity: 0; transform: translate(var(--tx), var(--ty)) scale(0.1); }
     }
 
     /* ── NOISE OVERLAY ── */
@@ -261,9 +300,37 @@
       width: 18px;
       height: 18px;
       border-radius: 50%;
-      background: #23a55a;
+      background: #747f8d;
       border: 3px solid var(--ink);
-      box-shadow: 0 0 8px #23a55a88;
+      transition: background 0.5s, box-shadow 0.5s;
+    }
+    .status.online  { background: #23a55a; box-shadow: 0 0 8px #23a55a88; }
+    .status.idle    { background: #f0b232; box-shadow: 0 0 8px #f0b23288; }
+    .status.dnd     { background: #f23f43; box-shadow: 0 0 8px #f23f4388; }
+    .status.offline { background: #747f8d; box-shadow: none; }
+
+    @keyframes spotifyPulse {
+      0%, 100% { opacity: 1; }
+      50%       { opacity: 0.5; }
+    }
+    .spotify-bar {
+      display: flex;
+      align-items: center;
+      gap: 0.5rem;
+      font-size: 0.62rem;
+      letter-spacing: 0.08em;
+      color: rgba(200,169,110,0.7);
+      background: rgba(200,169,110,0.06);
+      border: 1px solid rgba(200,169,110,0.15);
+      padding: 0.4rem 0.8rem;
+      margin-top: 0.5rem;
+    }
+    .spotify-bar .sp-dot {
+      width: 7px; height: 7px;
+      border-radius: 50%;
+      background: #1db954;
+      animation: spotifyPulse 1.5s ease-in-out infinite;
+      flex-shrink: 0;
     }
 
     /* name */
@@ -962,6 +1029,10 @@
   </style>
 </head>
 <body>
+  <!-- ── CUSTOM CURSOR ── -->
+  <div class="cursor-dot" id="cursorDot"></div>
+  <div class="cursor-ring" id="cursorRing"></div>
+
   <!-- Instagram gradient definition -->
   <svg width="0" height="0" style="position:absolute">
     <defs>
@@ -1043,10 +1114,11 @@
           src="https://cdn.discordapp.com/avatars/790524458971562044/70d4cc3766a2fcb561aff44347c48c85.webp?size=1024"
           alt="loved.castaway"
         />
-        <div class="status"></div>
+        <div class="status" id="statusDot"></div>
       </div>
 
       <h1 class="display-name">loved<span>.</span>castaway</h1>
+      <div id="liveActivity" style="display:none; align-items:center; gap:0.5rem; font-size:0.65rem; letter-spacing:0.1em; color:rgba(200,169,110,0.6); margin-top:0.3rem;"></div>
 
       <div class="divider"></div>
       <p class="subtitle">lost between two worlds — josef</p>
@@ -1094,11 +1166,16 @@
   <section class="gif-section">
     <p class="section-label">// aesthetic // الجماليات</p>
 
-    <div class="drift-gif-frame" id="aestheticFrame">
+    <div class="drift-gif-frame" id="aestheticFrame" style="position:relative;">
       <div class="drift-gif-inner" style="position:relative; min-height: 400px;">
         <img id="aestheticImg" src="https://i.pinimg.com/736x/f0/5e/a6/f05ea690d8b8c04596e7f63b78aa7046.jpg" alt="aesthetic" style="width:100%; display:block; filter:saturate(0.5) sepia(0.5) contrast(1.1); transition: opacity 1s ease; object-fit:cover; max-height:520px;" />
         <div class="eye-overlay"></div>
-        <div style="position:absolute; bottom:14px; left:50%; transform:translateX(-50%); z-index:3; display:flex; flex-wrap:wrap; gap:5px; justify-content:center; max-width:80%; background:rgba(10,8,5,0.45); padding:6px 10px; backdrop-filter:blur(4px);" id="aestheticDots"></div>
+        <!-- Prev arrow -->
+        <button onclick="goToAesthetic((aestheticIndex - 1 + aestheticImgs.length) % aestheticImgs.length)" style="position:absolute;left:0;top:50%;transform:translateY(-50%);z-index:4;background:rgba(10,8,5,0.6);border:none;color:#c8a96e;font-size:1.6rem;padding:0.8rem 1rem;cursor:pointer;backdrop-filter:blur(4px);transition:background 0.2s;" onmouseover="this.style.background='rgba(200,169,110,0.3)'" onmouseout="this.style.background='rgba(10,8,5,0.6)'">&#8249;</button>
+        <!-- Next arrow -->
+        <button onclick="goToAesthetic((aestheticIndex + 1) % aestheticImgs.length)" style="position:absolute;right:0;top:50%;transform:translateY(-50%);z-index:4;background:rgba(10,8,5,0.6);border:none;color:#c8a96e;font-size:1.6rem;padding:0.8rem 1rem;cursor:pointer;backdrop-filter:blur(4px);transition:background 0.2s;" onmouseover="this.style.background='rgba(200,169,110,0.3)'" onmouseout="this.style.background='rgba(10,8,5,0.6)'">&#8250;</button>
+        <!-- Counter -->
+        <div id="aestheticCounter" style="position:absolute;bottom:12px;left:50%;transform:translateX(-50%);z-index:4;font-family:'Share Tech Mono',monospace;font-size:0.62rem;letter-spacing:0.2em;color:rgba(200,169,110,0.6);background:rgba(10,8,5,0.5);padding:3px 10px;backdrop-filter:blur(4px);">1 / 35</div>
       </div>
     </div>
   </section>
@@ -1377,20 +1454,10 @@
 
     let aestheticIndex = 0;
     const aestheticEl = document.getElementById('aestheticImg');
-    const dotsContainer = document.getElementById('aestheticDots');
-
-    // Build dots
-    aestheticImgs.forEach((_, i) => {
-      const dot = document.createElement('div');
-      dot.style.cssText = `width:6px;height:6px;border-radius:50%;background:${i===0?'#c8a96e':'rgba(200,169,110,0.3)'};cursor:pointer;transition:background 0.3s;flex-shrink:0;`;
-      dot.addEventListener('click', () => goToAesthetic(i));
-      dotsContainer.appendChild(dot);
-    });
+    const aestheticCounter = document.getElementById('aestheticCounter');
 
     function updateDots() {
-      Array.from(dotsContainer.children).forEach((dot, i) => {
-        dot.style.background = i === aestheticIndex ? '#c8a96e' : 'rgba(200,169,110,0.3)';
-      });
+      if (aestheticCounter) aestheticCounter.textContent = `${aestheticIndex + 1} / ${aestheticImgs.length}`;
     }
 
     function goToAesthetic(index) {
@@ -1494,6 +1561,136 @@
       document.getElementById('gbMsg').value = '';
     }
     renderGuestbook();
+
+    // ── CUSTOM CURSOR ──
+    const cursorDot  = document.getElementById('cursorDot');
+    const cursorRing = document.getElementById('cursorRing');
+    let mouseX = 0, mouseY = 0;
+    let ringX  = 0, ringY  = 0;
+
+    const sparkColors = ['#c8a96e', '#d4522a', '#ff8c42', '#e8d5a3', '#ffffff'];
+
+    document.addEventListener('mousemove', (e) => {
+      mouseX = e.clientX;
+      mouseY = e.clientY;
+      cursorDot.style.left = mouseX + 'px';
+      cursorDot.style.top  = mouseY + 'px';
+      spawnSpark(mouseX, mouseY);
+    });
+
+    // Smooth ring follow
+    function animateRing() {
+      ringX += (mouseX - ringX) * 0.12;
+      ringY += (mouseY - ringY) * 0.12;
+      cursorRing.style.left = ringX + 'px';
+      cursorRing.style.top  = ringY + 'px';
+      requestAnimationFrame(animateRing);
+    }
+    animateRing();
+
+    // Cursor scale on click
+    document.addEventListener('mousedown', () => {
+      cursorDot.style.transform  = 'translate(-50%, -50%) scale(1.8)';
+      cursorRing.style.transform = 'translate(-50%, -50%) scale(0.6)';
+    });
+    document.addEventListener('mouseup', () => {
+      cursorDot.style.transform  = 'translate(-50%, -50%) scale(1)';
+      cursorRing.style.transform = 'translate(-50%, -50%) scale(1)';
+    });
+
+    // Spark trail
+    let lastSparkTime = 0;
+    function spawnSpark(x, y) {
+      const now = Date.now();
+      if (now - lastSparkTime < 30) return;
+      lastSparkTime = now;
+
+      const spark = document.createElement('div');
+      spark.className = 'spark';
+      const size = Math.random() * 5 + 3;
+      const color = sparkColors[Math.floor(Math.random() * sparkColors.length)];
+      const angle = Math.random() * Math.PI * 2;
+      const dist  = Math.random() * 30 + 10;
+      const tx = Math.cos(angle) * dist + 'px';
+      const ty = Math.sin(angle) * dist + 'px';
+
+      spark.style.cssText = `
+        left: ${x}px; top: ${y}px;
+        width: ${size}px; height: ${size}px;
+        background: ${color};
+        box-shadow: 0 0 ${size * 2}px ${color};
+        --tx: ${tx}; --ty: ${ty};
+      `;
+      document.body.appendChild(spark);
+      setTimeout(() => spark.remove(), 600);
+    }
+
+    // ── LANYARD LIVE DISCORD STATUS ──
+    const DISCORD_ID = '790524458971562044';
+    const statusDot = document.getElementById('statusDot');
+    const liveActivity = document.getElementById('liveActivity');
+
+    function applyStatus(status) {
+      statusDot.className = 'status ' + status;
+    }
+
+    function updateLanyard(data) {
+      const d = data.data;
+      applyStatus(d.discord_status || 'offline');
+
+      // Spotify
+      if (d.listening_to_spotify && d.spotify) {
+        const sp = d.spotify;
+        liveActivity.style.display = 'flex';
+        liveActivity.innerHTML = `
+          <div class="spotify-bar">
+            <div class="sp-dot"></div>
+            <span>🎵 ${sp.song} — ${sp.artist}</span>
+          </div>`;
+        return;
+      }
+
+      // Game / activity
+      const act = d.activities && d.activities.find(a => a.type === 0);
+      if (act) {
+        liveActivity.style.display = 'flex';
+        liveActivity.innerHTML = `<span>🎮 ${act.name}</span>`;
+        return;
+      }
+
+      // Custom status
+      const custom = d.activities && d.activities.find(a => a.type === 4);
+      if (custom && custom.state) {
+        liveActivity.style.display = 'flex';
+        liveActivity.innerHTML = `<span>${custom.emoji ? custom.emoji.name + ' ' : ''}${custom.state}</span>`;
+        return;
+      }
+
+      liveActivity.style.display = 'none';
+    }
+
+    function connectLanyard() {
+      const ws = new WebSocket('wss://api.lanyard.rest/socket');
+      let heartbeat;
+      ws.onopen = () => {
+        ws.send(JSON.stringify({ op: 2, d: { subscribe_to_id: DISCORD_ID } }));
+      };
+      ws.onmessage = (e) => {
+        const msg = JSON.parse(e.data);
+        if (msg.op === 1) {
+          heartbeat = setInterval(() => ws.send(JSON.stringify({ op: 3 })), msg.d.heartbeat_interval);
+        }
+        if (msg.op === 0 && (msg.t === 'INIT_STATE' || msg.t === 'PRESENCE_UPDATE')) {
+          updateLanyard(msg);
+        }
+      };
+      ws.onclose = () => {
+        clearInterval(heartbeat);
+        setTimeout(connectLanyard, 3000);
+      };
+    }
+
+    connectLanyard();
   </script>
 </body>
 </html>
