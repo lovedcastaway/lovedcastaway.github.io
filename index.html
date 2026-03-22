@@ -104,18 +104,25 @@
     .marquee-item a.social-tag {
       display: inline-flex;
       align-items: center;
-      gap: 0.3rem;
-      margin-left: 0.5rem;
+      margin-left: 0.6rem;
       color: rgba(200,169,110,0.5);
       text-decoration: none;
-      font-size: 0.65rem;
-      border: 1px solid rgba(200,169,110,0.2);
-      padding: 0.1rem 0.4rem;
+      border: none;
+      padding: 0;
       transition: all 0.2s;
+      background: none;
     }
-    .marquee-item a.social-tag:hover {
-      color: var(--sand);
-      border-color: var(--sand);
+    .marquee-item a.social-tag svg {
+      width: 1em;
+      height: 1em;
+      flex-shrink: 0;
+      fill: url(#igGradient);
+      filter: drop-shadow(0 0 3px rgba(225,48,108,0.5));
+      transition: filter 0.2s, transform 0.2s;
+    }
+    .marquee-item a.social-tag:hover svg {
+      filter: drop-shadow(0 0 6px rgba(225,48,108,0.9));
+      transform: scale(1.2);
     }
 
     /* ── HERO ── */
@@ -260,19 +267,24 @@
     }
 
     /* name */
+    @keyframes nameGlow {
+      0%   { color: #c8a96e; text-shadow: 0 0 20px #c8a96e, 0 0 40px #c8a96e88, 0 0 80px #c8a96e44; }
+      20%  { color: #d4522a; text-shadow: 0 0 20px #d4522a, 0 0 40px #d4522a88, 0 0 80px #d4522a44; }
+      40%  { color: #e8d5a3; text-shadow: 0 0 20px #e8d5a3, 0 0 40px #e8d5a388, 0 0 80px #e8d5a344; }
+      60%  { color: #a07850; text-shadow: 0 0 20px #a07850, 0 0 40px #a0785088, 0 0 80px #a0785044; }
+      80%  { color: #ff8c42; text-shadow: 0 0 20px #ff8c42, 0 0 40px #ff8c4288, 0 0 80px #ff8c4244; }
+      100% { color: #c8a96e; text-shadow: 0 0 20px #c8a96e, 0 0 40px #c8a96e88, 0 0 80px #c8a96e44; }
+    }
+
     .display-name {
       font-family: 'Bebas Neue', sans-serif;
       font-size: clamp(3rem, 10vw, 6.5rem);
       letter-spacing: 0.06em;
       line-height: 0.92;
-      color: var(--white-dust);
-      text-shadow:
-        0 0 40px rgba(212,82,42,0.25),
-        0 0 80px rgba(200,169,110,0.1);
-      animation: fadeUp 1.2s 0.45s both;
+      animation: nameGlow 4s ease-in-out infinite, fadeUp 1.2s 0.45s both;
     }
     .display-name span {
-      color: var(--sand);
+      color: inherit;
     }
 
     /* divider */
@@ -536,6 +548,9 @@
       padding: 0.9rem 0;
       background: rgba(200,169,110,0.03);
     }
+    .marquee-wrap:hover .marquee-track {
+      animation-play-state: paused;
+    }
     .marquee-track {
       display: flex;
       gap: 3rem;
@@ -546,6 +561,13 @@
       from { transform: translateX(0); }
       to   { transform: translateX(-50%); }
     }
+    .arabic-glow-text {
+      font-family: 'Amiri', serif;
+      font-size: clamp(1.6rem, 5vw, 2.8rem);
+      letter-spacing: 0.08em;
+      animation: nameGlow 4s ease-in-out infinite;
+    }
+
     @keyframes flicker {
       0%, 100% { opacity: 1; text-shadow: 0 0 8px rgba(200,169,110,0.9), 0 0 20px rgba(200,169,110,0.5), 0 0 40px rgba(200,169,110,0.3); }
       8%        { opacity: 0.85; text-shadow: none; }
@@ -940,6 +962,18 @@
   </style>
 </head>
 <body>
+  <!-- Instagram gradient definition -->
+  <svg width="0" height="0" style="position:absolute">
+    <defs>
+      <linearGradient id="igGradient" x1="0%" y1="100%" x2="100%" y2="0%">
+        <stop offset="0%" style="stop-color:#f09433"/>
+        <stop offset="25%" style="stop-color:#e6683c"/>
+        <stop offset="50%" style="stop-color:#dc2743"/>
+        <stop offset="75%" style="stop-color:#cc2366"/>
+        <stop offset="100%" style="stop-color:#bc1888"/>
+      </linearGradient>
+    </defs>
+  </svg>
 
   <!-- ── TOP SOCIALS BAR ── -->
   <nav class="top-bar">
@@ -1033,21 +1067,26 @@
     </div>
   </section>
 
+  <!-- ── ARABIC TEXT ── -->
+  <div style="text-align:center; padding: 1.2rem 0 0.4rem;">
+    <span class="arabic-glow-text">بعيوني العيال</span>
+  </div>
+
   <!-- ── MARQUEE ── -->
   <div class="marquee-wrap">
     <div class="marquee-track">
-      <span class="marquee-item"><span class="dot">◆</span>M.Binz<a class="social-tag" href="https://www.instagram.com/rqmv1?igsh=MWxhZzAzdTZwaTc=" target="_blank" rel="noopener">ig</a></span>
-      <span class="marquee-item"><span class="dot">◆</span>M7mD</span>
-      <span class="marquee-item"><span class="dot">◆</span>! ZERO</span>
-      <span class="marquee-item"><span class="dot">◆</span>Lost<a class="social-tag" href="https://www.instagram.com/5qpoz?igsh=MXdhd256Mml4NmF4Zw==" target="_blank" rel="noopener">ig</a></span>
-      <span class="marquee-item"><span class="dot">◆</span>FAISAL</span>
-      <span class="marquee-item"><span class="dot">◆</span>xx<a class="social-tag" href="https://www.instagram.com/sircortezia?igsh=Zmo2bWpseHdmZjcz" target="_blank" rel="noopener">ig</a></span>
-      <span class="marquee-item"><span class="dot">◆</span>M.Binz<a class="social-tag" href="https://www.instagram.com/rqmv1?igsh=MWxhZzAzdTZwaTc=" target="_blank" rel="noopener">ig</a></span>
-      <span class="marquee-item"><span class="dot">◆</span>M7mD</span>
-      <span class="marquee-item"><span class="dot">◆</span>! ZERO</span>
-      <span class="marquee-item"><span class="dot">◆</span>Lost<a class="social-tag" href="https://www.instagram.com/5qpoz?igsh=MXdhd256Mml4NmF4Zw==" target="_blank" rel="noopener">ig</a></span>
-      <span class="marquee-item"><span class="dot">◆</span>FAISAL</span>
-      <span class="marquee-item"><span class="dot">◆</span>xx<a class="social-tag" href="https://www.instagram.com/sircortezia?igsh=Zmo2bWpseHdmZjcz" target="_blank" rel="noopener">ig</a></span>
+      <span class="marquee-item"><span class="dot">◆</span>M.Binz<a class="social-tag" href="https://www.instagram.com/rqmv1?igsh=MWxhZzAzdTZwaTc=" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="18" height="18"><path fill="url(#igGradient)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></a></span>
+      <span class="marquee-item"><span class="dot">◆</span>M7mD<a class="social-tag" href="https://www.instagram.com/xmo0o7x?igsh=bnJwYWV5Z3Vtc3Vw" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="18" height="18"><path fill="url(#igGradient)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></a></span>
+      <span class="marquee-item"><span class="dot">◆</span>! ZERO<a class="social-tag" href="https://www.instagram.com/__zer.o?igsh=Y2htZXdwMnFkNXl0" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="18" height="18"><path fill="url(#igGradient)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></a></span>
+      <span class="marquee-item"><span class="dot">◆</span>Lost<a class="social-tag" href="https://www.instagram.com/5qpoz?igsh=MXdhd256Mml4NmF4Zw==" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="18" height="18"><path fill="url(#igGradient)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></a></span>
+      <span class="marquee-item"><span class="dot">◆</span>FAISAL<a class="social-tag" href="https://www.instagram.com/__fxa2?igsh=MW00dXRmMG5kZzM3Yg==" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="18" height="18"><path fill="url(#igGradient)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></a></span>
+      <span class="marquee-item"><span class="dot">◆</span>xx<a class="social-tag" href="https://www.instagram.com/sircortezia?igsh=Zmo2bWpseHdmZjcz" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="18" height="18"><path fill="url(#igGradient)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></a></span>
+      <span class="marquee-item"><span class="dot">◆</span>M.Binz<a class="social-tag" href="https://www.instagram.com/rqmv1?igsh=MWxhZzAzdTZwaTc=" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="18" height="18"><path fill="url(#igGradient)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></a></span>
+      <span class="marquee-item"><span class="dot">◆</span>M7mD<a class="social-tag" href="https://www.instagram.com/xmo0o7x?igsh=bnJwYWV5Z3Vtc3Vw" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="18" height="18"><path fill="url(#igGradient)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></a></span>
+      <span class="marquee-item"><span class="dot">◆</span>! ZERO<a class="social-tag" href="https://www.instagram.com/__zer.o?igsh=Y2htZXdwMnFkNXl0" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="18" height="18"><path fill="url(#igGradient)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></a></span>
+      <span class="marquee-item"><span class="dot">◆</span>Lost<a class="social-tag" href="https://www.instagram.com/5qpoz?igsh=MXdhd256Mml4NmF4Zw==" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="18" height="18"><path fill="url(#igGradient)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></a></span>
+      <span class="marquee-item"><span class="dot">◆</span>FAISAL<a class="social-tag" href="https://www.instagram.com/__fxa2?igsh=MW00dXRmMG5kZzM3Yg==" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="18" height="18"><path fill="url(#igGradient)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></a></span>
+      <span class="marquee-item"><span class="dot">◆</span>xx<a class="social-tag" href="https://www.instagram.com/sircortezia?igsh=Zmo2bWpseHdmZjcz" target="_blank" rel="noopener"><svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg" width="18" height="18"><path fill="url(#igGradient)" d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zM12 0C8.741 0 8.333.014 7.053.072 2.695.272.273 2.69.073 7.052.014 8.333 0 8.741 0 12c0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98C8.333 23.986 8.741 24 12 24c3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98C15.668.014 15.259 0 12 0zm0 5.838a6.162 6.162 0 1 0 0 12.324 6.162 6.162 0 0 0 0-12.324zM12 16a4 4 0 1 1 0-8 4 4 0 0 1 0 8zm6.406-11.845a1.44 1.44 0 1 0 0 2.881 1.44 1.44 0 0 0 0-2.881z"/></svg></a></span>
     </div>
   </div>
 
@@ -1059,7 +1098,7 @@
       <div class="drift-gif-inner" style="position:relative; min-height: 400px;">
         <img id="aestheticImg" src="https://i.pinimg.com/736x/f0/5e/a6/f05ea690d8b8c04596e7f63b78aa7046.jpg" alt="aesthetic" style="width:100%; display:block; filter:saturate(0.5) sepia(0.5) contrast(1.1); transition: opacity 1s ease; object-fit:cover; max-height:520px;" />
         <div class="eye-overlay"></div>
-        <div style="position:absolute; bottom:14px; right:14px; z-index:3; display:flex; gap:6px;" id="aestheticDots"></div>
+        <div style="position:absolute; bottom:14px; left:50%; transform:translateX(-50%); z-index:3; display:flex; flex-wrap:wrap; gap:5px; justify-content:center; max-width:80%; background:rgba(10,8,5,0.45); padding:6px 10px; backdrop-filter:blur(4px);" id="aestheticDots"></div>
       </div>
     </div>
   </section>
@@ -1186,7 +1225,8 @@
       'https://cdn.discordapp.com/attachments/1227568798450847816/1485171657076113438/an9l4i_1.gif?ex=69c0e564&is=69bf93e4&hm=48d4e8cf47964befe5506c85beb72f3de083c363af42589d6b8976d0f5861302&',
       'https://cdn.discordapp.com/attachments/1227568798450847816/1485171657416118415/an9l51_1.gif?ex=69c0e564&is=69bf93e4&hm=b0d1f39d1c7a6d28c5b27d4bb00744bc3f92c2a1b825637bc5875b1dd9e77a2c&',
       'https://cdn.discordapp.com/attachments/1227568798450847816/1485171657961111613/an9l58_1.gif?ex=69c0e564&is=69bf93e4&hm=96cd7247beb4d26bc0eacbd3fdea6eb7e1d93bbf18d4b1aa157c84a9bdfb4aed&',
-      'https://cdn.discordapp.com/attachments/1227568798450847816/1485171850337325248/cady.mp4_-_Trim.gif?ex=69c0e592&is=69bf9412&hm=08a5b6e2ce009dfa361284aa02594a91abde9427e87b6046f5bdeb7ec266f79c&'
+      'https://cdn.discordapp.com/attachments/1227568798450847816/1485171850337325248/cady.mp4_-_Trim.gif?ex=69c0e592&is=69bf9412&hm=08a5b6e2ce009dfa361284aa02594a91abde9427e87b6046f5bdeb7ec266f79c&',
+      'https://cdn.discordapp.com/attachments/1227568798450847816/1485268790177562856/ana2u7.gif?ex=69c13fda&is=69bfee5a&hm=9a5621e7711aa8869a9aa6af52808e225e63903cd86368fbe4752e7ac865d539&'
     ];
 
     let current = 0;
@@ -1321,7 +1361,18 @@
       'https://cdn.discordapp.com/attachments/1227568798450847816/1485182458805747872/download_39.jpg?ex=69c0ef73&is=69bf9df3&hm=5ce8f0c809aedf2a7253c59d853e33bb08c95c60cc6f33429233d031bb7c3277&',
       'https://cdn.discordapp.com/attachments/1227568798450847816/1485182459133038602/download_38.jpg?ex=69c0ef73&is=69bf9df3&hm=ce2de85422190be7e0110c8a461190072fc67fc8faba692f0c3a7ad8ca383f79&',
       'https://cdn.discordapp.com/attachments/1227568798450847816/1485182459414052915/download_37.jpg?ex=69c0ef73&is=69bf9df3&hm=1b722103b24974a8e72135a2066fc851cf7f766d245a373a2885151243a098d0&',
-      'https://cdn.discordapp.com/attachments/1227568798450847816/1485182460626206781/fiona_gallagher.jpg?ex=69c0ef73&is=69bf9df3&hm=278dee76e32b817676d156964c9b155d6d30bbfd410bbd67708f62e98d27ab72&'
+      'https://cdn.discordapp.com/attachments/1227568798450847816/1485182460626206781/fiona_gallagher.jpg?ex=69c0ef73&is=69bf9df3&hm=278dee76e32b817676d156964c9b155d6d30bbfd410bbd67708f62e98d27ab72&',
+      'https://i.pinimg.com/736x/f4/d2/49/f4d249872f56a14827cc41708f8f5661.jpg',
+      'https://i.pinimg.com/736x/d2/04/80/d20480cdf549ce5cde8c94a1132b1b94.jpg',
+      'https://i.pinimg.com/736x/3b/cb/f6/3bcbf604262dfb3bdde7e70d540671f0.jpg',
+      'https://i.pinimg.com/originals/c0/87/a2/c087a23b7428d224312789f4d09411cc.gif',
+      'https://i.pinimg.com/736x/de/8f/8b/de8f8bc15cf5c7184e9739ce6be19be6.jpg',
+      'https://i.pinimg.com/736x/ef/38/f7/ef38f75f44cb78a16f30587ce0cdf51b.jpg',
+      'https://i.pinimg.com/736x/15/c4/de/15c4de082394b9616380250db4a0f1bc.jpg',
+      'https://i.pinimg.com/736x/95/47/7c/95477c8038db2d75ef028d57db2b3c5a.jpg',
+      'https://i.pinimg.com/originals/8b/c6/8b/8bc68bda51404ccbdc98e3b01922020a.gif',
+      'https://i.pinimg.com/736x/b2/01/c2/b201c2295875eaa4172efd0b28c1f7a2.jpg',
+      'https://i.pinimg.com/736x/50/ad/9d/50ad9de4ade8310db1c0f2fe38e94780.jpg'
     ];
 
     let aestheticIndex = 0;
