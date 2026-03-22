@@ -679,6 +679,240 @@
       color: rgba(200,169,110,0.45);
     }
 
+    /* ── DARK/LIGHT TOGGLE ── */
+    body.light-mode {
+      --ink: #f5f0e8;
+      --smoke: #e8e0d0;
+      --white-dust: rgba(20,15,10,0.85);
+      --ash: #c8b89a;
+      background-color: var(--ink);
+      color: var(--white-dust);
+    }
+    body.light-mode .top-bar { background: rgba(245,240,232,0.85); }
+    body.light-mode .marquee-wrap { background: rgba(200,169,110,0.08); }
+    body.light-mode .interest-card,
+    body.light-mode .project-card { background: #e0d8c8; }
+
+    .toggle-btn {
+      position: fixed;
+      bottom: 1.5rem;
+      right: 1.5rem;
+      z-index: 1001;
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      border: 1px solid rgba(200,169,110,0.4);
+      background: rgba(10,8,5,0.8);
+      color: var(--sand);
+      font-size: 1.1rem;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      backdrop-filter: blur(8px);
+      transition: all 0.3s;
+    }
+    .toggle-btn:hover { background: var(--sand); color: var(--ink); }
+
+    /* ── MOOD SELECTOR ── */
+    .mood-section {
+      padding: 3rem 2rem;
+      max-width: 860px;
+      margin: 0 auto;
+      text-align: center;
+    }
+    .mood-grid {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.8rem;
+      justify-content: center;
+      margin-top: 2rem;
+    }
+    .mood-btn {
+      padding: 0.6rem 1.4rem;
+      border: 1px solid rgba(200,169,110,0.3);
+      background: transparent;
+      color: var(--sand);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1rem;
+      letter-spacing: 0.15em;
+      cursor: pointer;
+      transition: all 0.3s;
+      position: relative;
+      overflow: hidden;
+    }
+    .mood-btn:hover, .mood-btn.active {
+      background: var(--sand);
+      color: var(--ink);
+      border-color: var(--sand);
+    }
+    .mood-desc {
+      margin-top: 1.2rem;
+      font-size: 0.75rem;
+      color: rgba(200,169,110,0.55);
+      letter-spacing: 0.1em;
+      min-height: 1.2rem;
+      transition: opacity 0.3s;
+    }
+
+    /* ── RANDOM VIBE BUTTON ── */
+    .random-vibe-wrap {
+      display: flex;
+      justify-content: center;
+      margin: 1rem 0 2rem;
+    }
+    .random-vibe-btn {
+      padding: 0.8rem 2rem;
+      border: 1px solid rgba(200,169,110,0.4);
+      background: transparent;
+      color: var(--sand);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 1.1rem;
+      letter-spacing: 0.2em;
+      cursor: pointer;
+      transition: all 0.3s;
+      display: flex;
+      align-items: center;
+      gap: 0.6rem;
+    }
+    .random-vibe-btn:hover {
+      background: var(--ember);
+      border-color: var(--ember);
+      color: #fff;
+    }
+    .random-vibe-btn .spin { display: inline-block; transition: transform 0.5s; }
+    .random-vibe-btn:hover .spin { transform: rotate(180deg); }
+
+    /* ── GUESTBOOK ── */
+    .guestbook-section {
+      padding: 3rem 2rem 4rem;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .guestbook-form {
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+      margin-top: 2rem;
+    }
+    .guestbook-form input,
+    .guestbook-form textarea {
+      background: var(--smoke);
+      border: 1px solid rgba(200,169,110,0.2);
+      color: var(--white-dust);
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.78rem;
+      padding: 0.8rem 1rem;
+      outline: none;
+      resize: none;
+      transition: border-color 0.3s;
+    }
+    .guestbook-form input:focus,
+    .guestbook-form textarea:focus { border-color: rgba(200,169,110,0.6); }
+    .guestbook-form input::placeholder,
+    .guestbook-form textarea::placeholder { color: rgba(200,169,110,0.3); }
+    .guestbook-submit {
+      align-self: flex-start;
+      padding: 0.6rem 1.5rem;
+      background: transparent;
+      border: 1px solid rgba(200,169,110,0.4);
+      color: var(--sand);
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.25s;
+    }
+    .guestbook-submit:hover { background: var(--sand); color: var(--ink); }
+    .guestbook-messages {
+      margin-top: 2rem;
+      display: flex;
+      flex-direction: column;
+      gap: 0.8rem;
+    }
+    .guestbook-msg {
+      padding: 1rem 1.2rem;
+      background: var(--smoke);
+      border-left: 2px solid rgba(200,169,110,0.3);
+      animation: fadeUp 0.4s ease both;
+    }
+    .guestbook-msg .msg-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.9rem;
+      letter-spacing: 0.15em;
+      color: var(--sand);
+      margin-bottom: 0.3rem;
+    }
+    .guestbook-msg .msg-text {
+      font-size: 0.72rem;
+      color: rgba(255,248,235,0.6);
+      line-height: 1.6;
+    }
+    .guestbook-msg .msg-time {
+      font-size: 0.6rem;
+      color: rgba(200,169,110,0.3);
+      margin-top: 0.4rem;
+    }
+
+    /* ── SIGN THE WALL ── */
+    .wall-section {
+      padding: 3rem 2rem 4rem;
+      max-width: 860px;
+      margin: 0 auto;
+    }
+    .wall-input-row {
+      display: flex;
+      gap: 0.6rem;
+      margin-top: 2rem;
+      flex-wrap: wrap;
+    }
+    .wall-input {
+      flex: 1;
+      min-width: 160px;
+      background: var(--smoke);
+      border: 1px solid rgba(200,169,110,0.2);
+      color: var(--white-dust);
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.78rem;
+      padding: 0.7rem 1rem;
+      outline: none;
+      transition: border-color 0.3s;
+    }
+    .wall-input:focus { border-color: rgba(200,169,110,0.6); }
+    .wall-input::placeholder { color: rgba(200,169,110,0.3); }
+    .wall-sign-btn {
+      padding: 0.7rem 1.5rem;
+      background: transparent;
+      border: 1px solid rgba(200,169,110,0.4);
+      color: var(--sand);
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.72rem;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: all 0.25s;
+      white-space: nowrap;
+    }
+    .wall-sign-btn:hover { background: var(--sand); color: var(--ink); }
+    .wall-names {
+      margin-top: 1.5rem;
+      display: flex;
+      flex-wrap: wrap;
+      gap: 0.6rem;
+    }
+    .wall-tag {
+      padding: 0.35rem 0.9rem;
+      border: 1px solid rgba(200,169,110,0.25);
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: 0.85rem;
+      letter-spacing: 0.12em;
+      color: rgba(200,169,110,0.7);
+      animation: fadeUp 0.3s ease both;
+      transition: all 0.2s;
+    }
+    .wall-tag:hover { border-color: var(--sand); color: var(--sand); }
+
   </style>
 </head>
 <body>
@@ -853,6 +1087,11 @@
   <section class="video-section">
     <p class="section-label" style="margin-bottom:0.6rem;">// vibes // الأجواء</p>
     <h2 class="section-title" style="text-align:center;">Now <span class="accent">Playing</span></h2>
+    <div class="random-vibe-wrap">
+      <button class="random-vibe-btn" onclick="randomVibe()">
+        <span class="spin">🎲</span> RANDOM VIBE
+      </button>
+    </div>
     <div class="video-frame-wrap">
       <div class="video-border"></div>
       <div class="video-inner">
@@ -872,11 +1111,51 @@
     </div>
   </section>
 
+  <!-- ── MOOD SELECTOR ── -->
+  <section class="mood-section">
+    <p class="section-label" style="margin-bottom:0.6rem;">// mood // الحالة</p>
+    <h2 class="section-title" style="text-align:center;">Pick a <span class="accent">Vibe</span></h2>
+    <div class="mood-grid">
+      <button class="mood-btn" onclick="setMood('drift')">🚗 دريفت</button>
+      <button class="mood-btn" onclick="setMood('night')">🌙 Night Drive</button>
+      <button class="mood-btn" onclick="setMood('lost')">🌫️ Lost</button>
+      <button class="mood-btn" onclick="setMood('desert')">🏜️ Desert</button>
+      <button class="mood-btn" onclick="setMood('rage')">🔥 Rage</button>
+    </div>
+    <p class="mood-desc" id="moodDesc">— choose your mood —</p>
+  </section>
+
+  <!-- ── SIGN THE WALL ── -->
+  <section class="wall-section">
+    <p class="section-label" style="margin-bottom:0.6rem;">// the wall // الحائط</p>
+    <h2 class="section-title">Sign the <span class="accent">Wall</span></h2>
+    <div class="wall-input-row">
+      <input class="wall-input" id="wallInput" type="text" placeholder="drop your name..." maxlength="24" />
+      <button class="wall-sign-btn" onclick="signWall()">✦ sign it</button>
+    </div>
+    <div class="wall-names" id="wallNames"></div>
+  </section>
+
+  <!-- ── GUESTBOOK ── -->
+  <section class="guestbook-section">
+    <p class="section-label" style="margin-bottom:0.6rem;">// guestbook // سجل الزوار</p>
+    <h2 class="section-title">Leave a <span class="accent">Message</span></h2>
+    <div class="guestbook-form">
+      <input type="text" id="gbName" placeholder="your name..." maxlength="32" />
+      <textarea id="gbMsg" rows="3" placeholder="leave something behind..."></textarea>
+      <button class="guestbook-submit" onclick="submitGuestbook()">✦ submit</button>
+    </div>
+    <div class="guestbook-messages" id="gbMessages"></div>
+  </section>
+
   <!-- ── FOOTER ── -->
   <footer>
     <div class="footer-name">loved.castaway</div>
     <div class="footer-id">ID: 790524458971562044</div>
   </footer>
+
+  <!-- ── DARK/LIGHT TOGGLE BUTTON ── -->
+  <button class="toggle-btn" id="themeToggle" onclick="toggleTheme()" title="toggle theme">🌙</button>
 
   <script>
     // ── GIF BACKGROUND SHUFFLER ──
@@ -1055,6 +1334,93 @@
     }
 
     setInterval(nextAesthetic, 5000);
+
+    // ── DARK/LIGHT TOGGLE ──
+    function toggleTheme() {
+      document.body.classList.toggle('light-mode');
+      document.getElementById('themeToggle').textContent =
+        document.body.classList.contains('light-mode') ? '☀️' : '🌙';
+    }
+
+    // ── MOOD SELECTOR ──
+    const moods = {
+      drift:  { desc: '🚗 دريفت — smoke, speed, and no brakes', color: '#d4522a' },
+      night:  { desc: '🌙 Night Drive — the city is yours after midnight', color: '#4a6fa5' },
+      lost:   { desc: '🌫️ Lost — somewhere between here and nowhere', color: '#7a8c7e' },
+      desert: { desc: '🏜️ Desert — sand, silence, and the sun bleeding out', color: '#c8a96e' },
+      rage:   { desc: '🔥 Rage — burn it all, figure it out later', color: '#ff4422' },
+    };
+    function setMood(mood) {
+      document.querySelectorAll('.mood-btn').forEach(b => b.classList.remove('active'));
+      event.target.classList.add('active');
+      document.getElementById('moodDesc').textContent = moods[mood].desc;
+      document.documentElement.style.setProperty('--ember', moods[mood].color);
+    }
+
+    // ── RANDOM VIBE ──
+    function randomVibe() {
+      const idx = Math.floor(Math.random() * playlist.length);
+      vidIndex = idx;
+      updatePlayer();
+      document.getElementById('ytPlayer').scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+
+    // ── SIGN THE WALL ──
+    const wallNames = JSON.parse(localStorage.getItem('wallNames') || '[]');
+    function renderWall() {
+      const container = document.getElementById('wallNames');
+      container.innerHTML = '';
+      wallNames.forEach(name => {
+        const tag = document.createElement('div');
+        tag.className = 'wall-tag';
+        tag.textContent = name;
+        container.appendChild(tag);
+      });
+    }
+    function signWall() {
+      const input = document.getElementById('wallInput');
+      const name = input.value.trim();
+      if (!name) return;
+      wallNames.unshift(name);
+      if (wallNames.length > 100) wallNames.pop();
+      localStorage.setItem('wallNames', JSON.stringify(wallNames));
+      renderWall();
+      input.value = '';
+    }
+    document.getElementById('wallInput').addEventListener('keydown', e => {
+      if (e.key === 'Enter') signWall();
+    });
+    renderWall();
+
+    // ── GUESTBOOK ──
+    const gbMessages = JSON.parse(localStorage.getItem('gbMessages') || '[]');
+    function renderGuestbook() {
+      const container = document.getElementById('gbMessages');
+      container.innerHTML = '';
+      gbMessages.forEach(msg => {
+        const el = document.createElement('div');
+        el.className = 'guestbook-msg';
+        el.innerHTML = `
+          <div class="msg-name">${msg.name}</div>
+          <div class="msg-text">${msg.text}</div>
+          <div class="msg-time">${msg.time}</div>
+        `;
+        container.appendChild(el);
+      });
+    }
+    function submitGuestbook() {
+      const name = document.getElementById('gbName').value.trim();
+      const text = document.getElementById('gbMsg').value.trim();
+      if (!name || !text) return;
+      const now = new Date().toLocaleDateString('en-GB', { day:'2-digit', month:'short', year:'numeric' });
+      gbMessages.unshift({ name, text, time: now });
+      if (gbMessages.length > 50) gbMessages.pop();
+      localStorage.setItem('gbMessages', JSON.stringify(gbMessages));
+      renderGuestbook();
+      document.getElementById('gbName').value = '';
+      document.getElementById('gbMsg').value = '';
+    }
+    renderGuestbook();
   </script>
 </body>
 </html>
