@@ -2002,6 +2002,14 @@
       const name = discordUser ? discordUser.name : input.value.trim();
       const avatar = discordUser ? discordUser.avatar : null;
       if (!name) return;
+
+      // Check if name already exists
+      const existing = await sbFetch(`wall?name=eq.${encodeURIComponent(name)}&limit=1`);
+      if (existing && existing.length > 0) {
+        alert('You already signed the wall!');
+        return;
+      }
+
       await sbFetch('wall', 'POST', avatar ? { name, avatar } : { name });
       sendNotif('New Wall Sign', `${name} signed your wall!`);
       if (!discordUser) input.value = '';
