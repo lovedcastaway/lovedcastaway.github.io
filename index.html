@@ -31,28 +31,28 @@
     /* ── CUSTOM CURSOR ── */
     .cursor-dot {
       position: fixed;
-      width: 10px;
-      height: 10px;
+      width: 8px;
+      height: 8px;
       border-radius: 50%;
       background: #c8a96e;
       pointer-events: none;
       z-index: 99999;
       transform: translate(-50%, -50%);
-      transition: transform 0.1s ease, background 0.2s;
-      box-shadow: 0 0 8px #c8a96e, 0 0 16px #c8a96e88;
+      box-shadow: 0 0 6px #c8a96e;
       mix-blend-mode: screen;
+      will-change: left, top;
     }
     .cursor-ring {
       position: fixed;
-      width: 32px;
-      height: 32px;
+      width: 28px;
+      height: 28px;
       border-radius: 50%;
-      border: 1px solid rgba(200,169,110,0.5);
+      border: 1px solid rgba(200,169,110,0.4);
       pointer-events: none;
       z-index: 99998;
       transform: translate(-50%, -50%);
-      transition: all 0.12s ease;
       mix-blend-mode: screen;
+      will-change: left, top;
     }
     .spark {
       position: fixed;
@@ -1204,7 +1204,7 @@
   <!-- ── GLITCH LOADING SCREEN ── -->
   <div id="loader">
     <div class="loader-name">loved.castaway</div>
-    <div class="loader-sub">// entering the drift //</div>
+    <div style="font-family:'Amiri',serif; font-size:clamp(1rem,4vw,1.6rem); color:rgba(200,169,110,0.7); letter-spacing:0.05em; margin-top:-0.3rem;">شي ما شفتوه</div>
     <div class="loader-bar-wrap">
       <div class="loader-bar" id="loaderBar"></div>
     </div>
@@ -1403,7 +1403,6 @@
       </div>
     </div>
   </section>
-
   <!-- ── VIDEOS ── -->
   <section class="video-section">
     <p class="section-label" style="margin-bottom:0.6rem;">// vibes // الأجواء</p>
@@ -1838,7 +1837,7 @@
     let mouseX = 0, mouseY = 0;
     let ringX  = 0, ringY  = 0;
 
-    const sparkColors = ['#c8a96e', '#d4522a', '#ff8c42', '#e8d5a3', '#ffffff'];
+    const sparkColors = ['#c8a96e', '#d4522a', '#ff8c42', '#e8d5a3'];
 
     document.addEventListener('mousemove', (e) => {
       mouseX = e.clientX;
@@ -1848,10 +1847,10 @@
       spawnSpark(mouseX, mouseY);
     });
 
-    // Smooth ring follow
+    // Smoother ring follow — higher lerp = less lag
     function animateRing() {
-      ringX += (mouseX - ringX) * 0.12;
-      ringY += (mouseY - ringY) * 0.12;
+      ringX += (mouseX - ringX) * 0.25;
+      ringY += (mouseY - ringY) * 0.25;
       cursorRing.style.left = ringX + 'px';
       cursorRing.style.top  = ringY + 'px';
       requestAnimationFrame(animateRing);
@@ -1860,27 +1859,27 @@
 
     // Cursor scale on click
     document.addEventListener('mousedown', () => {
-      cursorDot.style.transform  = 'translate(-50%, -50%) scale(1.8)';
-      cursorRing.style.transform = 'translate(-50%, -50%) scale(0.6)';
+      cursorDot.style.transform  = 'translate(-50%, -50%) scale(1.5)';
+      cursorRing.style.transform = 'translate(-50%, -50%) scale(0.7)';
     });
     document.addEventListener('mouseup', () => {
       cursorDot.style.transform  = 'translate(-50%, -50%) scale(1)';
       cursorRing.style.transform = 'translate(-50%, -50%) scale(1)';
     });
 
-    // Spark trail
+    // Spark trail — less frequent, smaller, more subtle
     let lastSparkTime = 0;
     function spawnSpark(x, y) {
       const now = Date.now();
-      if (now - lastSparkTime < 30) return;
+      if (now - lastSparkTime < 60) return;
       lastSparkTime = now;
 
       const spark = document.createElement('div');
       spark.className = 'spark';
-      const size = Math.random() * 5 + 3;
+      const size = Math.random() * 3 + 2;
       const color = sparkColors[Math.floor(Math.random() * sparkColors.length)];
       const angle = Math.random() * Math.PI * 2;
-      const dist  = Math.random() * 30 + 10;
+      const dist  = Math.random() * 18 + 6;
       const tx = Math.cos(angle) * dist + 'px';
       const ty = Math.sin(angle) * dist + 'px';
 
@@ -1888,11 +1887,11 @@
         left: ${x}px; top: ${y}px;
         width: ${size}px; height: ${size}px;
         background: ${color};
-        box-shadow: 0 0 ${size * 2}px ${color};
+        box-shadow: 0 0 ${size}px ${color};
         --tx: ${tx}; --ty: ${ty};
       `;
       document.body.appendChild(spark);
-      setTimeout(() => spark.remove(), 600);
+      setTimeout(() => spark.remove(), 500);
     }
 
     // ── LANYARD LIVE DISCORD STATUS ──
