@@ -4,6 +4,8 @@
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
   <title>loved.castaway</title>
+  <link rel="icon" type="image/webp" href="https://cdn.discordapp.com/avatars/790524458971562044/70d4cc3766a2fcb561aff44347c48c85.webp?size=64" />
+  <link rel="apple-touch-icon" href="https://cdn.discordapp.com/avatars/790524458971562044/70d4cc3766a2fcb561aff44347c48c85.webp?size=64" />
   <link href="https://fonts.googleapis.com/css2?family=Amiri:ital,wght@0,400;0,700;1,400&family=Bebas+Neue&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
   <style>
     *, *::before, *::after { margin: 0; padding: 0; box-sizing: border-box; }
@@ -2004,8 +2006,8 @@
       if (!name) return;
 
       // Check if name already exists
-      const existing = await sbFetch(`wall?name=eq.${encodeURIComponent(name)}&limit=1`);
-      if (existing && existing.length > 0) {
+      const existing = await sbFetch(`wall?name=eq.${encodeURIComponent(name)}&select=id&limit=1`);
+      if (Array.isArray(existing) && existing.length > 0) {
         alert('You already signed the wall!');
         return;
       }
@@ -2124,6 +2126,14 @@
       document.body.appendChild(spark);
       setTimeout(() => spark.remove(), 500);
     }
+
+    // ── ANIMATED PAGE TITLE ──
+    const titles = ['loved.castaway ✦', 'loved.castaway ◆', 'loved.castaway ·'];
+    let titleIndex = 0;
+    setInterval(() => {
+      titleIndex = (titleIndex + 1) % titles.length;
+      document.title = titles[titleIndex];
+    }, 1500);
 
     // ── LANYARD LIVE DISCORD STATUS ──
     const DISCORD_ID = '790524458971562044';
