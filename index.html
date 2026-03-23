@@ -827,6 +827,99 @@
     }
     .toggle-btn:hover { background: var(--sand); color: var(--ink); }
 
+    /* ── GLITCH LOADING SCREEN ── */
+    #loader {
+      position: fixed;
+      inset: 0;
+      background: #0a0805;
+      z-index: 99999;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      gap: 1rem;
+      transition: opacity 0.8s ease;
+    }
+    #loader.hide {
+      opacity: 0;
+      pointer-events: none;
+    }
+    .loader-name {
+      font-family: 'Bebas Neue', sans-serif;
+      font-size: clamp(2.5rem, 10vw, 5rem);
+      letter-spacing: 0.08em;
+      color: #c8a96e;
+      position: relative;
+      animation: loaderGlitch 0.12s infinite;
+    }
+    .loader-name::before {
+      content: 'loved.castaway';
+      position: absolute;
+      left: -4px;
+      top: 0;
+      color: #d4522a;
+      opacity: 0.75;
+      animation: loaderGlitch2 0.12s infinite;
+      clip-path: polygon(0 25%, 100% 25%, 100% 45%, 0 45%);
+    }
+    .loader-name::after {
+      content: 'loved.castaway';
+      position: absolute;
+      left: 4px;
+      top: 0;
+      color: #4a6fa5;
+      opacity: 0.75;
+      animation: loaderGlitch3 0.12s infinite;
+      clip-path: polygon(0 60%, 100% 60%, 100% 78%, 0 78%);
+    }
+    @keyframes loaderGlitch {
+      0%,92%,100% { transform: none; }
+      93%  { transform: skewX(6deg) translateX(-3px); }
+      96%  { transform: skewX(-4deg) translateX(2px); }
+      98%  { transform: none; }
+    }
+    @keyframes loaderGlitch2 {
+      0%,88%,100% { transform: none; opacity: 0.75; }
+      89%  { transform: translateX(6px); opacity: 1; }
+      93%  { transform: translateX(-3px); }
+      97%  { transform: none; }
+    }
+    @keyframes loaderGlitch3 {
+      0%,85%,100% { transform: none; opacity: 0.75; }
+      86%  { transform: translateX(-6px); opacity: 1; }
+      91%  { transform: translateX(3px); }
+      96%  { transform: none; }
+    }
+    .loader-sub {
+      font-family: 'Share Tech Mono', monospace;
+      font-size: 0.65rem;
+      letter-spacing: 0.3em;
+      color: rgba(200,169,110,0.35);
+      text-transform: uppercase;
+      animation: loaderSubFlicker 0.15s infinite;
+    }
+    @keyframes loaderSubFlicker {
+      0%,90%,100% { opacity: 1; }
+      91% { opacity: 0; }
+      93% { opacity: 1; }
+      95% { opacity: 0; }
+      97% { opacity: 1; }
+    }
+    .loader-bar-wrap {
+      width: min(280px, 70vw);
+      height: 1px;
+      background: rgba(200,169,110,0.1);
+      margin-top: 1rem;
+      position: relative;
+      overflow: hidden;
+    }
+    .loader-bar {
+      height: 1px;
+      width: 0%;
+      background: linear-gradient(90deg, transparent, #c8a96e, #d4522a);
+      transition: width 0.05s linear;
+    }
+
     /* ── MOOD SELECTOR ── */
     .mood-section {
       padding: 3rem 2rem;
@@ -1108,6 +1201,15 @@
   </style>
 </head>
 <body>
+  <!-- ── GLITCH LOADING SCREEN ── -->
+  <div id="loader">
+    <div class="loader-name">loved.castaway</div>
+    <div class="loader-sub">// entering the drift //</div>
+    <div class="loader-bar-wrap">
+      <div class="loader-bar" id="loaderBar"></div>
+    </div>
+  </div>
+
   <!-- ── CUSTOM CURSOR ── -->
   <div class="cursor-dot" id="cursorDot"></div>
   <div class="cursor-ring" id="cursorRing"></div>
@@ -1379,6 +1481,25 @@
   <button class="toggle-btn" id="themeToggle" onclick="toggleTheme()" title="toggle theme">🌙</button>
 
   <script>
+    // ── GLITCH LOADING SCREEN ──
+    const loaderBar = document.getElementById('loaderBar');
+    const loader = document.getElementById('loader');
+    let progress = 0;
+    const loaderInterval = setInterval(() => {
+      progress += Math.random() * 18 + 4;
+      if (progress >= 100) {
+        progress = 100;
+        loaderBar.style.width = '100%';
+        clearInterval(loaderInterval);
+        setTimeout(() => {
+          loader.classList.add('hide');
+          setTimeout(() => loader.remove(), 800);
+        }, 400);
+      } else {
+        loaderBar.style.width = progress + '%';
+      }
+    }, 80);
+
     // ── GIF BACKGROUND SHUFFLER ──
     const gifs = [
       'https://cdn.discordapp.com/attachments/1227568798450847816/1485171657076113438/an9l4i_1.gif?ex=69c0e564&is=69bf93e4&hm=48d4e8cf47964befe5506c85beb72f3de083c363af42589d6b8976d0f5861302&',
