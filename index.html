@@ -905,7 +905,10 @@
       95% { opacity: 0; }
       97% { opacity: 1; }
     }
-    .loader-bar-wrap {
+    @keyframes gifFlash {
+      0%, 100% { opacity: 0; }
+      40%, 60% { opacity: 0.12; }
+    }
       width: min(280px, 70vw);
       height: 1px;
       background: rgba(200,169,110,0.1);
@@ -1203,9 +1206,10 @@
 <body>
   <!-- ── GLITCH LOADING SCREEN ── -->
   <div id="loader">
-    <div class="loader-name">loved.castaway</div>
-    <div style="font-family:'Amiri',serif; font-size:clamp(1rem,4vw,1.6rem); color:rgba(200,169,110,0.7); letter-spacing:0.05em; margin-top:-0.3rem;">شي ما شفتوه</div>
-    <div class="loader-bar-wrap">
+    <img src="https://i.imgur.com/x5ehzod.gif" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;opacity:0;animation:gifFlash 1.2s ease-in-out infinite;pointer-events:none;z-index:0;" />
+    <div class="loader-name" style="position:relative;z-index:1;">loved.castaway</div>
+    <div style="position:relative;z-index:1;font-family:'Amiri',serif; font-size:clamp(1rem,4vw,1.6rem); color:rgba(200,169,110,0.7); letter-spacing:0.05em; margin-top:-0.3rem;">شي ما شفتوه</div>
+    <div class="loader-bar-wrap" style="position:relative;z-index:1;">
       <div class="loader-bar" id="loaderBar"></div>
     </div>
   </div>
