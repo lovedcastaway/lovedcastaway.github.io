@@ -1207,192 +1207,6 @@
       border: 1px solid rgba(200,169,110,0.2);
     }
 
-    /* ── MUSIC PLAYER ── */
-    .music-section {
-      padding: 4rem 2rem;
-      max-width: 860px;
-      margin: 0 auto;
-    }
-    .music-player {
-      background: var(--smoke);
-      border: 1px solid rgba(200,169,110,0.15);
-      margin-top: 2rem;
-      overflow: hidden;
-    }
-    .music-now-playing {
-      padding: 1.5rem;
-      border-bottom: 1px solid rgba(200,169,110,0.1);
-      display: flex;
-      align-items: center;
-      gap: 1rem;
-    }
-    .music-vinyl {
-      width: 52px;
-      height: 52px;
-      border-radius: 50%;
-      background: radial-gradient(circle at 50%, #1c1712 30%, #2a2218 60%, #0a0805 100%);
-      border: 2px solid rgba(200,169,110,0.2);
-      flex-shrink: 0;
-      position: relative;
-      animation: vinylSpin 4s linear infinite paused;
-    }
-    .music-vinyl.playing { animation-play-state: running; }
-    .music-vinyl::after {
-      content: '';
-      position: absolute;
-      inset: 40%;
-      border-radius: 50%;
-      background: var(--sand);
-      opacity: 0.6;
-    }
-    @keyframes vinylSpin { to { transform: rotate(360deg); } }
-    .music-track-info { flex: 1; min-width: 0; }
-    .music-track-name {
-      font-family: 'Bebas Neue', sans-serif;
-      font-size: 1rem;
-      letter-spacing: 0.1em;
-      color: var(--sand);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-    }
-    .music-track-folder {
-      font-size: 0.6rem;
-      letter-spacing: 0.15em;
-      color: rgba(200,169,110,0.35);
-      text-transform: uppercase;
-      margin-top: 2px;
-    }
-    .music-controls {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      padding: 1rem 1.5rem;
-      border-bottom: 1px solid rgba(200,169,110,0.08);
-    }
-    .music-btn {
-      background: none;
-      border: none;
-      color: rgba(200,169,110,0.6);
-      cursor: pointer;
-      font-size: 1rem;
-      padding: 0.3rem;
-      transition: color 0.2s;
-      line-height: 1;
-    }
-    .music-btn:hover, .music-btn.active { color: var(--sand); }
-    .music-btn.play-btn {
-      width: 36px; height: 36px;
-      border: 1px solid rgba(200,169,110,0.3);
-      border-radius: 50%;
-      display: flex; align-items: center; justify-content: center;
-      font-size: 0.8rem;
-    }
-    .music-progress-wrap {
-      flex: 1;
-      display: flex;
-      align-items: center;
-      gap: 0.6rem;
-    }
-    .music-progress {
-      flex: 1;
-      height: 2px;
-      background: rgba(200,169,110,0.15);
-      position: relative;
-      cursor: pointer;
-    }
-    .music-progress-bar {
-      height: 100%;
-      background: var(--sand);
-      width: 0%;
-      transition: width 0.5s linear;
-      pointer-events: none;
-    }
-    .music-time {
-      font-size: 0.58rem;
-      color: rgba(200,169,110,0.35);
-      letter-spacing: 0.08em;
-      white-space: nowrap;
-      min-width: 70px;
-      text-align: right;
-    }
-    .music-volume {
-      width: 60px;
-      accent-color: var(--sand);
-    }
-    .music-filters {
-      display: flex;
-      gap: 0.4rem;
-      padding: 0.8rem 1.5rem;
-      border-bottom: 1px solid rgba(200,169,110,0.08);
-      flex-wrap: wrap;
-    }
-    .music-filter-btn {
-      font-family: 'Share Tech Mono', monospace;
-      font-size: 0.6rem;
-      letter-spacing: 0.12em;
-      padding: 0.25rem 0.7rem;
-      background: transparent;
-      border: 1px solid rgba(200,169,110,0.2);
-      color: rgba(200,169,110,0.45);
-      cursor: pointer;
-      transition: all 0.2s;
-      text-transform: uppercase;
-    }
-    .music-filter-btn:hover, .music-filter-btn.active {
-      background: rgba(200,169,110,0.1);
-      color: var(--sand);
-      border-color: rgba(200,169,110,0.5);
-    }
-    .music-tracklist {
-      max-height: 280px;
-      overflow-y: auto;
-      scrollbar-width: thin;
-      scrollbar-color: rgba(200,169,110,0.2) transparent;
-    }
-    .music-track-item {
-      display: flex;
-      align-items: center;
-      gap: 0.8rem;
-      padding: 0.65rem 1.5rem;
-      cursor: pointer;
-      transition: background 0.2s;
-      border-bottom: 1px solid rgba(200,169,110,0.04);
-    }
-    .music-track-item:hover { background: rgba(200,169,110,0.05); }
-    .music-track-item.active { background: rgba(200,169,110,0.08); }
-    .music-track-num {
-      font-size: 0.58rem;
-      color: rgba(200,169,110,0.25);
-      width: 20px;
-      text-align: right;
-      flex-shrink: 0;
-    }
-    .music-track-item.active .music-track-num { color: var(--sand); }
-    .music-track-item-name {
-      flex: 1;
-      font-size: 0.7rem;
-      color: rgba(255,248,235,0.6);
-      white-space: nowrap;
-      overflow: hidden;
-      text-overflow: ellipsis;
-      letter-spacing: 0.04em;
-    }
-    .music-track-item.active .music-track-item-name { color: var(--sand); }
-    .music-track-item-folder {
-      font-size: 0.55rem;
-      color: rgba(200,169,110,0.2);
-      letter-spacing: 0.1em;
-      flex-shrink: 0;
-    }
-    .music-loading {
-      padding: 2rem;
-      text-align: center;
-      font-size: 0.65rem;
-      color: rgba(200,169,110,0.35);
-      letter-spacing: 0.2em;
-    }
-
     /* ── MOBILE RESPONSIVE ── */
     @media (max-width: 768px) {
 
@@ -1678,42 +1492,32 @@
       </div>
     </div>
   </section>
-  <!-- ── MUSIC PLAYER ── -->
-  <section class="music-section">
+  <!-- ── VIDEOS ── -->
+  <section class="video-section">
     <p class="section-label" style="margin-bottom:0.6rem;">// vibes // الأجواء</p>
-    <h2 class="section-title">The <span class="accent">Collection</span></h2>
-    <div class="music-player">
-      <div class="music-now-playing">
-        <div class="music-vinyl" id="musicVinyl"></div>
-        <div class="music-track-info">
-          <div class="music-track-name" id="musicTrackName">— select a track —</div>
-          <div class="music-track-folder" id="musicTrackFolder">loading tracks...</div>
-        </div>
-      </div>
-      <div class="music-controls">
-        <button class="music-btn" onclick="musicPrev()" title="Previous">&#9664;&#9664;</button>
-        <button class="music-btn play-btn" id="musicPlayBtn" onclick="musicToggle()">&#9654;</button>
-        <button class="music-btn" onclick="musicNext()" title="Next">&#9654;&#9654;</button>
-        <div class="music-progress-wrap">
-          <div class="music-progress" id="musicProgress" onclick="musicSeek(event)">
-            <div class="music-progress-bar" id="musicProgressBar"></div>
-          </div>
-          <span class="music-time" id="musicTime">0:00 / 0:00</span>
-        </div>
-        <button class="music-btn" id="musicShuffleBtn" onclick="musicToggleShuffle()" title="Shuffle">⇄</button>
-        <input type="range" class="music-volume" id="musicVolume" min="0" max="1" step="0.05" value="0.8" oninput="musicSetVolume(this.value)" />
-      </div>
-      <div class="music-filters">
-        <button class="music-filter-btn active" onclick="musicFilter('all', this)">All</button>
-        <button class="music-filter-btn" onclick="musicFilter('عراقي', this)">عراقي</button>
-        <button class="music-filter-btn" onclick="musicFilter('اجنبي', this)">اجنبي</button>
-        <button class="music-filter-btn" onclick="musicFilter('خليجي', this)">خليجي</button>
-      </div>
-      <div class="music-tracklist" id="musicTracklist">
-        <div class="music-loading">// loading tracks from archive //</div>
+    <h2 class="section-title" style="text-align:center;">Now <span class="accent">Playing</span></h2>
+    <div class="random-vibe-wrap">
+      <button class="random-vibe-btn" onclick="randomVibe()">
+        <span class="spin">🎲</span> RANDOM VIBE
+      </button>
+    </div>
+    <div class="video-frame-wrap">
+      <div class="video-border"></div>
+      <div class="video-inner">
+        <iframe
+          id="ytPlayer"
+          src=""
+          frameborder="0"
+          allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+          allowfullscreen
+        ></iframe>
       </div>
     </div>
-    <audio id="musicAudio"></audio>
+    <div class="video-controls">
+      <button class="vid-btn" onclick="prevVideo()">&#9664; PREV</button>
+      <span class="vid-counter" id="vidCounter">1 / —</span>
+      <button class="vid-btn" onclick="nextVideo()">NEXT &#9654;</button>
+    </div>
   </section>
 
   <!-- ── MOOD SELECTOR ── -->
@@ -2322,145 +2126,6 @@
       document.body.appendChild(spark);
       setTimeout(() => spark.remove(), 500);
     }
-
-    // ── MUSIC PLAYER ──
-    const ARCHIVE_ID = '20260323_20260323_0943';
-    const ARCHIVE_BASE = `https://archive.org/download/${ARCHIVE_ID}/`;
-    let allTracks = [], filteredTracks = [], currentTrackIndex = 0;
-    let musicIsPlaying = false, musicShuffle = false;
-    const audio = document.getElementById('musicAudio');
-
-    // Load tracks from Archive.org API
-    async function loadTracks() {
-      try {
-        const res = await fetch(`https://archive.org/metadata/${ARCHIVE_ID}`);
-        const data = await res.json();
-        const mp3Files = data.files.filter(f =>
-          f.name.toLowerCase().endsWith('.mp3') && f.source === 'original'
-        );
-
-        allTracks = mp3Files.map(f => {
-          const parts = f.name.split('/');
-          const folder = parts.length > 1 ? decodeURIComponent(parts[0]) : 'other';
-          const filename = parts[parts.length - 1];
-          const name = decodeURIComponent(filename.replace(/\.mp3$/i, '').replace(/^\d+\s*-\s*/, ''));
-          return { name, folder, url: ARCHIVE_BASE + encodeURIComponent(f.name).replace(/%2F/g, '/'), raw: f.name };
-        });
-
-        filteredTracks = [...allTracks];
-        renderTracklist();
-        document.getElementById('musicTrackFolder').textContent = `${allTracks.length} tracks loaded`;
-      } catch(e) {
-        document.getElementById('musicTracklist').innerHTML = '<div class="music-loading">// failed to load tracks //</div>';
-      }
-    }
-
-    function renderTracklist() {
-      const list = document.getElementById('musicTracklist');
-      if (!filteredTracks.length) {
-        list.innerHTML = '<div class="music-loading">// no tracks //</div>';
-        return;
-      }
-      list.innerHTML = filteredTracks.map((t, i) => `
-        <div class="music-track-item${i === currentTrackIndex ? ' active' : ''}" onclick="musicPlay(${i})">
-          <span class="music-track-num">${i + 1}</span>
-          <span class="music-track-item-name">${t.name}</span>
-          <span class="music-track-item-folder">${t.folder}</span>
-        </div>
-      `).join('');
-    }
-
-    function musicPlay(index) {
-      currentTrackIndex = index;
-      const track = filteredTracks[index];
-      if (!track) return;
-      audio.src = track.url;
-      audio.volume = parseFloat(document.getElementById('musicVolume').value);
-      audio.play();
-      musicIsPlaying = true;
-      document.getElementById('musicPlayBtn').innerHTML = '&#9646;&#9646;';
-      document.getElementById('musicTrackName').textContent = track.name;
-      document.getElementById('musicTrackFolder').textContent = track.folder;
-      document.getElementById('musicVinyl').classList.add('playing');
-      renderTracklist();
-      // scroll active track into view
-      setTimeout(() => {
-        const active = document.querySelector('.music-track-item.active');
-        if (active) active.scrollIntoView({ block: 'nearest' });
-      }, 100);
-    }
-
-    function musicToggle() {
-      if (!audio.src || audio.src === window.location.href) {
-        if (filteredTracks.length) musicPlay(0);
-        return;
-      }
-      if (musicIsPlaying) {
-        audio.pause();
-        musicIsPlaying = false;
-        document.getElementById('musicPlayBtn').innerHTML = '&#9654;';
-        document.getElementById('musicVinyl').classList.remove('playing');
-      } else {
-        audio.play();
-        musicIsPlaying = true;
-        document.getElementById('musicPlayBtn').innerHTML = '&#9646;&#9646;';
-        document.getElementById('musicVinyl').classList.add('playing');
-      }
-    }
-
-    function musicNext() {
-      if (!filteredTracks.length) return;
-      const next = musicShuffle
-        ? Math.floor(Math.random() * filteredTracks.length)
-        : (currentTrackIndex + 1) % filteredTracks.length;
-      musicPlay(next);
-    }
-
-    function musicPrev() {
-      if (!filteredTracks.length) return;
-      const prev = (currentTrackIndex - 1 + filteredTracks.length) % filteredTracks.length;
-      musicPlay(prev);
-    }
-
-    function musicToggleShuffle() {
-      musicShuffle = !musicShuffle;
-      document.getElementById('musicShuffleBtn').style.color = musicShuffle ? 'var(--sand)' : '';
-    }
-
-    function musicSetVolume(v) { audio.volume = parseFloat(v); }
-
-    function musicSeek(e) {
-      if (!audio.duration) return;
-      const rect = e.currentTarget.getBoundingClientRect();
-      const pct = (e.clientX - rect.left) / rect.width;
-      audio.currentTime = pct * audio.duration;
-    }
-
-    function musicFilter(folder, btn) {
-      document.querySelectorAll('.music-filter-btn').forEach(b => b.classList.remove('active'));
-      btn.classList.add('active');
-      filteredTracks = folder === 'all' ? [...allTracks] : allTracks.filter(t => t.folder === folder);
-      currentTrackIndex = 0;
-      renderTracklist();
-    }
-
-    function formatTime(s) {
-      if (!s || isNaN(s)) return '0:00';
-      const m = Math.floor(s / 60);
-      const sec = Math.floor(s % 60).toString().padStart(2, '0');
-      return `${m}:${sec}`;
-    }
-
-    audio.addEventListener('timeupdate', () => {
-      if (!audio.duration) return;
-      const pct = (audio.currentTime / audio.duration) * 100;
-      document.getElementById('musicProgressBar').style.width = pct + '%';
-      document.getElementById('musicTime').textContent = `${formatTime(audio.currentTime)} / ${formatTime(audio.duration)}`;
-    });
-
-    audio.addEventListener('ended', () => musicNext());
-
-    loadTracks();
 
     // ── ANIMATED PAGE TITLE ──
     const titles = ['loved.castaway ✦', 'loved.castaway ◆', 'loved.castaway ·'];
