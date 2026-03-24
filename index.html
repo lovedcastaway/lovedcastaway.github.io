@@ -470,7 +470,7 @@
       filter: saturate(0.45) sepia(0.4);
       z-index: 0;
       opacity: 1;
-      transition: opacity 1s ease;
+      transition: opacity 1.5s ease;
     }
 
     /* Arabic-style decorative border */
@@ -1710,7 +1710,7 @@
   <!-- ── HERO ── -->
   <section class="hero">
     <div class="hero-bg">
-      <img class="hero-bg-gif" id="heroBgGif" src="https://cdn.discordapp.com/attachments/1227568798450847816/1485171657076113438/an9l4i_1.gif?ex=69c0e564&is=69bf93e4&hm=48d4e8cf47964befe5506c85beb72f3de083c363af42589d6b8976d0f5861302&" alt="" />
+      <img class="hero-bg-gif" id="heroBgGif" src="https://res.cloudinary.com/dykgznzyp/image/upload/v1774357221/an9l4i_1_pemizn.gif" alt="" />
       <div class="hero-bg-overlay"></div>
     </div>
     <div class="hero-frame"></div>
@@ -2177,28 +2177,46 @@
       }
     }, 80);
 
-    // ── GIF BACKGROUND SHUFFLER ──
+    // ── GIF BACKGROUND CROSSFADE SHUFFLER ──
     const gifs = [
-      'https://cdn.discordapp.com/attachments/1227568798450847816/1485171657076113438/an9l4i_1.gif?ex=69c0e564&is=69bf93e4&hm=48d4e8cf47964befe5506c85beb72f3de083c363af42589d6b8976d0f5861302&',
-      'https://cdn.discordapp.com/attachments/1227568798450847816/1485171657416118415/an9l51_1.gif?ex=69c0e564&is=69bf93e4&hm=b0d1f39d1c7a6d28c5b27d4bb00744bc3f92c2a1b825637bc5875b1dd9e77a2c&',
-      'https://cdn.discordapp.com/attachments/1227568798450847816/1485171657961111613/an9l58_1.gif?ex=69c0e564&is=69bf93e4&hm=96cd7247beb4d26bc0eacbd3fdea6eb7e1d93bbf18d4b1aa157c84a9bdfb4aed&',
-      'https://cdn.discordapp.com/attachments/1227568798450847816/1485171850337325248/cady.mp4_-_Trim.gif?ex=69c0e592&is=69bf9412&hm=08a5b6e2ce009dfa361284aa02594a91abde9427e87b6046f5bdeb7ec266f79c&',
-      'https://cdn.discordapp.com/attachments/1227568798450847816/1485268790177562856/ana2u7.gif?ex=69c13fda&is=69bfee5a&hm=9a5621e7711aa8869a9aa6af52808e225e63903cd86368fbe4752e7ac865d539&'
+      'https://res.cloudinary.com/dykgznzyp/image/upload/v1774357221/an9l4i_1_pemizn.gif',
+      'https://res.cloudinary.com/dykgznzyp/image/upload/v1774357212/an9l51_1_gwzqdb.gif',
+      'https://res.cloudinary.com/dykgznzyp/image/upload/v1774357212/an9l58_1_t0eu51.gif',
+      'https://res.cloudinary.com/dykgznzyp/image/upload/v1774357212/cady.mp4_-_Trim_vtjstj.gif',
+      'https://res.cloudinary.com/dykgznzyp/image/upload/v1774357181/ana2u7_rz4zhv.gif'
     ];
 
-    let current = 0;
-    const el = document.getElementById('heroBgGif');
+    // Build a second img layer for crossfading
+    const gifA = document.getElementById('heroBgGif');
+    const gifB = gifA.cloneNode();
+    gifB.style.opacity = '0';
+    gifA.parentNode.insertBefore(gifB, gifA);
 
-    function shuffleNext() {
-      el.style.opacity = '0';
-      setTimeout(() => {
-        current = (current + 1) % gifs.length;
-        el.src = gifs[current];
-        el.style.opacity = '1';
-      }, 1000);
+    let current = 0;
+    let layerA = gifA; // visible layer
+    let layerB = gifB; // hidden layer (preloads next)
+
+    function crossfadeNext() {
+      const next = (current + 1) % gifs.length;
+
+      // Preload next gif into the hidden layer
+      layerB.src = gifs[next];
+
+      const doFade = () => {
+        layerB.style.opacity = '1';
+        layerA.style.opacity = '0';
+        setTimeout(() => {
+          current = next;
+          [layerA, layerB] = [layerB, layerA];
+        }, 1500);
+      };
+
+      layerB.onload = doFade;
+      // Fallback for cached gifs where onload won't fire
+      if (layerB.complete) doFade();
     }
 
-    setInterval(shuffleNext, 6000);
+    setInterval(crossfadeNext, 6000);
 
     // ── YOUTUBE VIDEO SHUFFLER ──
     const videos = [
